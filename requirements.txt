@@ -9,4 +9,4 @@ requests==2.3.0
 six==1.7.3
 
 # Gunicorn 19.0.0 has a critical bug. Waiting for 19.1.0 release
-git+git://github.com/benoitc/gunicorn.git@26df0651bcf1655ef63ac3b968344d737d3a7bfc#egg=gunicorn
+#git+git://github.com/benoitc/gunicorn.git@26df0651bcf1655ef63ac3b968344d737d3a7bfc#egg=gunicorn

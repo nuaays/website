@@ -40,6 +40,21 @@ def get_system_info(request, *args, **kwargs):
 
     return HttpResponse(json.dumps(data), content_type='application/json', *args, **kwargs)
 
+@csrf_exempt
+@require_http_methods(["GET"])
+def get_user_info(request, *args, **kwargs):
+    """
+    get user info include access_token
+    :param request:
+    :param args:
+    :param kwargs:
+    :return:
+
+    """
+
+    pass
+
+
 
 @csrf_exempt
 @protected_resource(server_cls=MyServer, scopes=["can_create_application"])

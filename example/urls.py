@@ -3,17 +3,17 @@ from django.contrib import admin
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import TemplateView
 
-from .views import (
+from example.views import (
     ConsumerView, ConsumerExchangeView, ConsumerDoneView, ApiEndpoint, ApiClientView
 )
-from .api_v1 import get_system_info, applications_list, applications_detail
+from example.api_v1 import get_system_info, applications_list, applications_detail
 
 admin.autodiscover()
 
 urlpatterns = patterns(
     '',
     url(
-        regex=r'^$',
+        regex=r'^oauth$',
         view=TemplateView.as_view(template_name='example/home.html'),
         name='home'
     ),
@@ -22,11 +22,11 @@ urlpatterns = patterns(
         view='django.contrib.auth.views.login',
         kwargs={'template_name': 'example/login.html'}
     ),
-    url(
-        regex='^accounts/logout/$',
-        view='django.contrib.auth.views.logout',
-        kwargs={'next_page': reverse_lazy('home')}
-    ),
+    # url(
+    #     regex='^accounts/logout/$',
+    #     view='django.contrib.auth.views.logout',
+    #     kwargs={'next_page': reverse_lazy('home')}
+    # ),
 
     # the Django admin
     url(r'^admin/', include(admin.site.urls)),

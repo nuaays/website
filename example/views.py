@@ -10,7 +10,6 @@ from .forms import ConsumerForm, ConsumerExchangeForm, AccessTokenDataForm
 import json
 from collections import namedtuple
 
-
 ApiUrl = namedtuple('ApiUrl', 'name, url')
 
 
@@ -22,12 +21,14 @@ class ConsumerExchangeView(FormView):
     template_name = 'example/consumer-exchange.html'
 
     def get(self, request, *args, **kwargs):
+        print  'data ===', request.GET
         try:
             self.initial = {
                 'code': request.GET['code'],
                 'state': request.GET['state'],
                 'redirect_url': request.build_absolute_uri(reverse('consumer-exchange'))
             }
+
         except KeyError:
             kwargs['noparams'] = True
 
@@ -61,7 +62,6 @@ class ConsumerView(FormView):
         return self.render_to_response(self.get_context_data(form=form, **kwargs))
 
     def post(self, request, *args, **kwargs):
-        self.request = request
         return super(ConsumerView, self).post(request, *args, **kwargs)
 
     def form_valid(self, form):
@@ -90,7 +90,6 @@ class ConsumerDoneView(TemplateView):
                 'refresh_token': request.GET.get('refresh_token', None),
             })
             kwargs['form'] = form
-
         return super(ConsumerDoneView, self).get(request, *args, **kwargs)
 
 
@@ -114,3 +113,4 @@ class ApiClientView(TemplateView):
 class ApiEndpoint(ProtectedResourceView):
     def get(self, request, *args, **kwargs):
         return HttpResponse('Hello, OAuth2!')
+

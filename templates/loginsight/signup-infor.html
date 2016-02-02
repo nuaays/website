@@ -1,0 +1,63 @@
+﻿<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>注册 | LogInsight</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+		<link href="/static/css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<script src="/static/js/jquery.min.js"></script>
+		<link href="/static/css/style.css" rel='stylesheet' type='text/css' />
+		<script src="/static/js/jquery.maskedinput.js" type="text/javacript" > </script>
+		<script type="text/javascript" src="/static/js/jquery.validate.js" ></script>
+		<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71035313-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1a2fead704d6f0d4a6e35987b2da75cf";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+	</head>
+	<body>
+	<body class="login-background">
+				<!--Contents-->
+
+            <div class="signup-infor">
+				<div>
+					<a href="index.html"><img src="/static/images/logolv.png"></a>
+					<h4>请填写以下信息完成注册。</h4>
+				</div>
+				<form method="post" id="signupform" action="/register">
+					<div>
+						<input type="text" placeholder="邮箱" class="form-control" name="email" autocomplete="on" id="email">
+						<input type="password" placeholder="登录密码 6~15 位" class="form-control" name="password" autocomplete="off" id="password" style="ime-mode:disabled;" onpaste="return false">
+						<input type="password" placeholder="再次输入密码" class="form-control" name="repassword" autocomplete="off" id="repassword" style="ime-mode:disabled;" onpaste="return false">
+						<input type="text" placeholder="姓名" class="form-control" name="username" autocomplete="on" id="name">
+						<input type="text" placeholder="手机号码" class="form-control phone" name="cellphone" autocomplete="on" id="cellphone">
+						<input type="text" placeholder="企业名称" class="form-control" name="companyName" autocomplete="on" id="companyName">
+						<input type="text" placeholder="服务器数量" class="form-control" name="servercnt" autocomplete="on" id="servercnt">
+					</div>
+					<div>
+						<input type="submit" name="submit" value="完成注册" class="btn btn-success" id="submit_btn">
+					</div>
+
+					<div class="infor-p">
+						<a href="http://alpha.loginsight.cn/auth/login/"><p  style="color:#41b068;text-decoration:underline;">已有账号！点击登陆。</p></a>
+					</div>
+				</form>
+			</div>
+			<script type="text/javascript" src="/static/js/index.js"></script>
+	</body>
+</html>
