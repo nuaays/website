@@ -30,10 +30,6 @@ def recruitment(request):
     return render_to_response('loginsight/recruitment.html')
 
 
-def login(request):
-    return render_to_response('loginsight/login.html', )
-
-
 def check_phone(request):
     p = request.POST.get('cellphone')
     v = UserDetail.objects.filter(phone=p)

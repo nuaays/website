@@ -29,7 +29,7 @@ urlpatterns = patterns(
     # ),
 
     # the Django admin
-    url(r'^admin/', include(admin.site.urls)),
+    # url(r'^admin/', include(admin.site.urls)),
 
     # consumer logic
     url(

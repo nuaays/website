@@ -2,8 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.core.urlresolvers import reverse_lazy
-
-from .views import *
+from website.views import  *
 
 admin.autodiscover()
 
@@ -15,8 +14,9 @@ urlpatterns = patterns('',
                        # Examples:
                        # url(r'^$', 'loginsight_site.views.home', name='home'),
                        # url(r'^blog/', include('blog.urls')),
-                       url(r'^$', index, ),
-                       # url(r'^index', index),
+
+                       # url(r'^$', index, ),
+                       url(r'^index', index),
                        url(r'^register', register),
                        url(r'^about', about),
                        url(r'^contact', contact_us),
@@ -46,5 +46,4 @@ urlpatterns = patterns('',
                        url(r'^404', f404),
                        url(r'^logo', logo),
                        url(r'^ceshi', ceshi),
-                       url(r'^admin', include(admin.site.urls)),
                        )

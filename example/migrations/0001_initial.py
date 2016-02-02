@@ -8,23 +8,24 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'UserDetail'
-        db.create_table(u'website_userdetail', (
+        # Adding model 'MyApplication'
+        db.create_table(u'example_myapplication', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('email', self.gf('django.db.models.fields.EmailField')(max_length=256)),
-            ('password', self.gf('django.db.models.fields.CharField')(max_length=128, null=True, blank=True)),
-            ('phone', self.gf('django.db.models.fields.CharField')(max_length=12, null=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=256, null=True)),
-            ('company', self.gf('django.db.models.fields.CharField')(max_length=256, null=True)),
-            ('server_count', self.gf('django.db.models.fields.IntegerField')(null=True)),
+            ('client_id', self.gf('django.db.models.fields.CharField')(default=u'7be?c!;2IZKLSUFeg1l_i7pXIO7FhfwVJQq@wZPR', unique=True, max_length=100, db_index=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('redirect_uris', self.gf('django.db.models.fields.TextField')(blank=True)),
+            ('client_type', self.gf('django.db.models.fields.CharField')(max_length=32)),
+            ('authorization_grant_type', self.gf('django.db.models.fields.CharField')(max_length=32)),
+            ('client_secret', self.gf('django.db.models.fields.CharField')(default=u'yCjl;q8:3f;GtBggBZxy29aKoksKmi-OrcxMsR05n9f@sQOa8L6H_0_:Px@HpHqbSyl;94@vSO1Qz.xV5ANM!5y2N7wkW-f=4oMqe7vUz5?r..HBp5O4majb_s8Nt7Vb', max_length=255, db_index=True, blank=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=255, blank=True)),
+            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
         ))
-        db.send_create_signal(u'website', ['UserDetail'])
+        db.send_create_signal(u'example', ['MyApplication'])
 
 
     def backwards(self, orm):
-        # Deleting model 'UserDetail'
-        db.delete_table(u'website_userdetail')
+        # Deleting model 'MyApplication'
+        db.delete_table(u'example_myapplication')
 
 
     models = {
@@ -64,17 +65,18 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        u'website.userdetail': {
-            'Meta': {'object_name': 'UserDetail'},
-            'company': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '256'}),
+        u'example.myapplication': {
+            'Meta': {'object_name': 'MyApplication'},
+            'authorization_grant_type': ('django.db.models.fields.CharField', [], {'max_length': '32'}),
+            'client_id': ('django.db.models.fields.CharField', [], {'default': "u'MLxATD!J=rhRuWA7ZMK;5Nxg3y1SC_8ggDIWb1Sf'", 'unique': 'True', 'max_length': '100', 'db_index': 'True'}),
+            'client_secret': ('django.db.models.fields.CharField', [], {'default': "u'PqnFpAUq04qXeyZ6ID.wHEvg-2Lv3MI0QjZix9QWyT3pt_czQsRK4xbblz4AGQzpR:1klbDO;PU!XGbsTu9aI6EMTN8Y:-9nw;77TJ-@NGeO86m6sD4kCu-Pdx!l4.9T'", 'max_length': '255', 'db_index': 'True', 'blank': 'True'}),
+            'client_type': ('django.db.models.fields.CharField', [], {'max_length': '32'}),
+            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True'}),
-            'password': ('django.db.models.fields.CharField', [], {'max_length': '128', 'null': 'True', 'blank': 'True'}),
-            'phone': ('django.db.models.fields.CharField', [], {'max_length': '12', 'null': 'True'}),
-            'server_count': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
+            'redirect_uris': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
         }
     }
 
-    complete_apps = ['website']
+    complete_apps = ['example']
