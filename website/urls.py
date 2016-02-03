@@ -17,7 +17,7 @@ urlpatterns = patterns('',
 
                        # url(r'^$', index, ),
                        url(r'^index', index),
-                       url(r'^register', register),
+                       url(r'register', register),
                        url(r'^about', about),
                        url(r'^contact', contact_us),
                        url(

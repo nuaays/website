@@ -92,7 +92,7 @@ jQuery.extend(jQuery.validator.messages, {
 					email: true,
 					remote: {
 						url: "/checkemail",     //后台处理程序
-						type: "post",               //数据发送方式
+						type: "get",               //数据发送方式
 						dataType: "json",           //接受数据格式
 						data: {                     //要传递的数据
 							email: function () {
@@ -123,7 +123,7 @@ jQuery.extend(jQuery.validator.messages, {
 				    minlength: 11,
 					remote: {
 						url: "/checkphone",     //后台处理程序
-						type: "post",               //数据发送方式
+						type: "get",               //数据发送方式
 						dataType: "json",           //接受数据格式
 						data: {                     //要传递的数据
 							cellphone: function () {

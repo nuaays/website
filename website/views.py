@@ -6,7 +6,9 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.conf import settings
 from django.views.generic import View
+from django.core.context_processors import csrf
 from django.contrib.auth.models import User
+from django.db import transaction
 from models import UserDetail
 import datetime
 
@@ -31,6 +33,7 @@ def recruitment(request):
 
 
 def check_phone(request):
+    print request.method
     p = request.POST.get('cellphone')
     v = UserDetail.objects.filter(phone=p)
     if len(v) == 0:
@@ -40,13 +43,15 @@ def check_phone(request):
 
 
 def check_email(request):
-    e = request.POST.get('email')
+    if request.method == 'GET':
+        e = request.GET.get('email')
+    if request.method == 'POST':
+        e = request.POST.get('email')
     v = User.objects.filter(email=e)
     if len(v) == 0:
         return HttpResponse(True)
     else:
         return HttpResponse(False)
-
 
 def register(request):
     if request.method == 'POST':
@@ -64,7 +69,8 @@ def register(request):
                         is_staff=True,
                         is_active=True,
                         date_joined=str(datetime.datetime.now()))
-
+            user.set_password(password)
+            user.save()
             user_details = UserDetail(email=email,
                                       phone=cellphone,
                                       company=companyName,
@@ -73,14 +79,15 @@ def register(request):
                                       name=name,
                                       user=user)
 
-            user.save()
+
             user_details.save()
             return render_to_response("loginsight/signup-com.html")
 
         else:
-             return render_to_response('loginsight/signup-infor.html', {'msg': '账户名已存在'})
-
-    return render_to_response("loginsight/signup-infor.html")
+            return render_to_response('loginsight/signup-infor.html', {'msg': '账户名已存在'})
+    c = {}
+    c.update(csrf(request))
+    return render_to_response("loginsight/signup-infor.html", c)
 
 
 def landingpage(request):
