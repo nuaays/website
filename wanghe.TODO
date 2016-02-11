@@ -1,0 +1,16 @@
+/***********************************
+ * Author:         wanghe
+ * Email:          wangh@loginsight.cn
+ * Author website: 
+ *
+ * File: wanghe.TODO
+ * Create Date: 2016-02-06 18:14:56
+ *
+ *********************************/
+
+1. oauth 简化模式的授方权实现
+2. 用户注册后的邮件验证
+3. 用户忘记密码的邮件找回
+4. agent 授权的demo 
+ 
+
