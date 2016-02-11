@@ -8,13 +8,14 @@ from django.http import HttpResponseBadRequest, HttpResponseNotFound
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
-
+from django.contrib.auth.models import User
 from oauthlib import __version__ as OAUTHLIB_VERSION
 from oauthlib.oauth2 import Server
-
+from django.http import HttpResponseRedirect
 from .models import MyApplication
+from oauth2_provider.models import AccessToken
 
-
+from django.contrib.auth import login
 class MyServer(Server):
     """
     A custom server which bypasses OAuth controls for every GET request
@@ -41,7 +42,7 @@ def get_system_info(request, *args, **kwargs):
     return HttpResponse(json.dumps(data), content_type='application/json', *args, **kwargs)
 
 @csrf_exempt
-@require_http_methods(["GET"])
+@require_http_methods(["POST"])
 def get_user_info(request, *args, **kwargs):
     """
     get user info include access_token
@@ -49,12 +50,16 @@ def get_user_info(request, *args, **kwargs):
     :param args:
     :param kwargs:
     :return:
-
     """
 
-    pass
-
-
+    if request.method == 'POST':
+        token = request.POST.get('token')
+        token_obj = AccessToken.objects.get(token=token)
+        user = User.objects.get(id=token_obj.user.id)
+        data = serializers.serialize("json", [user])
+        # data = {'username': user.username, 'user_id': user.id,'email': user.email, 'password': user.password }
+        # return HttpResponse(data, content_type='application/json', status=200, *args, **kwargs)
+        return HttpResponse(data, content_type='application/json', status=200, *args, **kwargs)
 
 @csrf_exempt
 @protected_resource(server_cls=MyServer, scopes=["can_create_application"])

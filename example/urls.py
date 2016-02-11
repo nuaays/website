@@ -6,7 +6,7 @@ from django.views.generic import TemplateView
 from example.views import (
     ConsumerView, ConsumerExchangeView, ConsumerDoneView, ApiEndpoint, ApiClientView
 )
-from example.api_v1 import get_system_info, applications_list, applications_detail
+from example.api_v1 import get_system_info, applications_list, applications_detail, get_user_info
 
 admin.autodiscover()
 
@@ -59,7 +59,7 @@ urlpatterns = patterns(
     # api stuff to test server functionalities
     url(r'^apiclient$', ApiClientView.as_view(), name='api-client'),
     url(r'^api/hello$', ApiEndpoint.as_view(), name='Hello'),
-
+    url(r'^api/user_info$', get_user_info, name='api-get-user'),
     # api v1
     url(r'^api/v1/system_info$', get_system_info, name="System Info"),
     url(r'^api/v1/applications$', applications_list, name="Application List"),

@@ -190,6 +190,7 @@ LOGGING = {
     }
 }
 
+
 OAUTH2_PROVIDER = {
     'SCOPES': {'example': 'This is an example scope'},
     'APPLICATION_MODEL': 'example.MyApplication'
@@ -198,3 +199,31 @@ OAUTH2_PROVIDER = {
 from django.core.urlresolvers import reverse_lazy
 
 LOGIN_REDIRECT_URL = reverse_lazy('index')
+
+USERS_REGISTRATION_OPEN = True
+ 
+USERS_VERIFY_EMAIL = True
+  
+USERS_AUTO_LOGIN_ON_ACTIVATION = True
+   
+USERS_EMAIL_CONFIRMATION_TIMEOUT_DAYS = 3
+    
+# Specifies minimum length for passwords:
+USERS_PASSWORD_MIN_LENGTH = 5
+     
+ # Specifies maximum length for passwords:
+ USERS_PASSWORD_MAX_LENGTH = None
+      
+# the complexity validator, checks the password strength
+USERS_CHECK_PASSWORD_COMPLEXITY = True
+       
+USERS_SPAM_PROTECTION = False  # important!
+
+ACCOUNT_ACTIVATION_DAYS=7
+EMAIL_HOST='localhost'
+EMAIL_PORT=465
+EMAIL_HOST_USER='wangh@loginsight.cn'
+EMAIL_HOST_PASSOWORD='wh@yuxuangh&163'
+EMAIL_USE_TLS=False
+DEFAULT_FORM_EMAIL='wangh@loginsight.cn'
+

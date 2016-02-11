@@ -21,7 +21,6 @@ class ConsumerExchangeView(FormView):
     template_name = 'example/consumer-exchange.html'
 
     def get(self, request, *args, **kwargs):
-        print  'data ===', request.GET
         try:
             self.initial = {
                 'code': request.GET['code'],
@@ -112,5 +111,7 @@ class ApiClientView(TemplateView):
 
 class ApiEndpoint(ProtectedResourceView):
     def get(self, request, *args, **kwargs):
-        return HttpResponse('Hello, OAuth2!')
+        user = request.user
+        data = {'username': user.username, 'user_id': request.user.id,'email': user.email, 'session': request.session['_auth_user_id'] }
+        return HttpResponse(str(data))
 

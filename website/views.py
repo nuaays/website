@@ -79,7 +79,6 @@ def register(request):
                                       name=name,
                                       user=user)
 
-
             user_details.save()
             return render_to_response("loginsight/signup-com.html")
 
