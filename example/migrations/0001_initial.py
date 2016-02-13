@@ -11,14 +11,15 @@ class Migration(SchemaMigration):
         # Adding model 'MyApplication'
         db.create_table(u'example_myapplication', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('client_id', self.gf('django.db.models.fields.CharField')(default=u'7be?c!;2IZKLSUFeg1l_i7pXIO7FhfwVJQq@wZPR', unique=True, max_length=100, db_index=True)),
+            ('client_id', self.gf('django.db.models.fields.CharField')(default=u'Q7aG;i.ZnW.Pwli2o2!?5yMFD0btJtW=8.p@h1jd', unique=True, max_length=100, db_index=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('redirect_uris', self.gf('django.db.models.fields.TextField')(blank=True)),
             ('client_type', self.gf('django.db.models.fields.CharField')(max_length=32)),
             ('authorization_grant_type', self.gf('django.db.models.fields.CharField')(max_length=32)),
-            ('client_secret', self.gf('django.db.models.fields.CharField')(default=u'yCjl;q8:3f;GtBggBZxy29aKoksKmi-OrcxMsR05n9f@sQOa8L6H_0_:Px@HpHqbSyl;94@vSO1Qz.xV5ANM!5y2N7wkW-f=4oMqe7vUz5?r..HBp5O4majb_s8Nt7Vb', max_length=255, db_index=True, blank=True)),
+            ('client_secret', self.gf('django.db.models.fields.CharField')(default=u'3nE=UHoL=.msINUm2BreZ.uaK?ejd.3GcyU4poz54G9RkL0zWh3DL3H6TkuLC-8Dv-BD6ArNZqGB00e-nW19l:7jrwKKb;TAlG;GnRIAaE!JdraljW70hZiWC:l=n8DZ', max_length=255, db_index=True, blank=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=255, blank=True)),
             ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
+            ('skip_authorization', self.gf('django.db.models.fields.BooleanField')(default=True)),
         ))
         db.send_create_signal(u'example', ['MyApplication'])
 
@@ -68,13 +69,14 @@ class Migration(SchemaMigration):
         u'example.myapplication': {
             'Meta': {'object_name': 'MyApplication'},
             'authorization_grant_type': ('django.db.models.fields.CharField', [], {'max_length': '32'}),
-            'client_id': ('django.db.models.fields.CharField', [], {'default': "u'MLxATD!J=rhRuWA7ZMK;5Nxg3y1SC_8ggDIWb1Sf'", 'unique': 'True', 'max_length': '100', 'db_index': 'True'}),
-            'client_secret': ('django.db.models.fields.CharField', [], {'default': "u'PqnFpAUq04qXeyZ6ID.wHEvg-2Lv3MI0QjZix9QWyT3pt_czQsRK4xbblz4AGQzpR:1klbDO;PU!XGbsTu9aI6EMTN8Y:-9nw;77TJ-@NGeO86m6sD4kCu-Pdx!l4.9T'", 'max_length': '255', 'db_index': 'True', 'blank': 'True'}),
+            'client_id': ('django.db.models.fields.CharField', [], {'default': "u'cL_ltkfx50ZB-8XosD.AQMW5kxBlqNBubgw1G8wf'", 'unique': 'True', 'max_length': '100', 'db_index': 'True'}),
+            'client_secret': ('django.db.models.fields.CharField', [], {'default': "u't.5@_!Ri4SGw6vMoo=spJM=wPA9W;W51QExpLh?KEiOS9HL9n;lCZ=425MIdI6wk4IU3dcM?;dXI6pp0sZ_wB;CYd?Krsx4k0iQj91Mm482irm9wZ@T0MAeaa-I3bB68'", 'max_length': '255', 'db_index': 'True', 'blank': 'True'}),
             'client_type': ('django.db.models.fields.CharField', [], {'max_length': '32'}),
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
             'redirect_uris': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'skip_authorization': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
         }
     }

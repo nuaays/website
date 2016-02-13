@@ -8,15 +8,23 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'MyApplication.skip_authorization'
-        db.add_column(u'example_myapplication', 'skip_authorization',
-                      self.gf('django.db.models.fields.BooleanField')(default=True),
-                      keep_default=False)
+        # Adding model 'UserDetail'
+        db.create_table(u'website_userdetail', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('email', self.gf('django.db.models.fields.EmailField')(max_length=256)),
+            ('password', self.gf('django.db.models.fields.CharField')(max_length=128, null=True, blank=True)),
+            ('phone', self.gf('django.db.models.fields.CharField')(max_length=12, null=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=256, null=True)),
+            ('company', self.gf('django.db.models.fields.CharField')(max_length=256, null=True)),
+            ('server_count', self.gf('django.db.models.fields.IntegerField')(null=True)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+        ))
+        db.send_create_signal(u'website', ['UserDetail'])
 
 
     def backwards(self, orm):
-        # Deleting field 'MyApplication.skip_authorization'
-        db.delete_column(u'example_myapplication', 'skip_authorization')
+        # Deleting model 'UserDetail'
+        db.delete_table(u'website_userdetail')
 
 
     models = {
@@ -56,19 +64,17 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        u'example.myapplication': {
-            'Meta': {'object_name': 'MyApplication'},
-            'authorization_grant_type': ('django.db.models.fields.CharField', [], {'max_length': '32'}),
-            'client_id': ('django.db.models.fields.CharField', [], {'default': "u'QyI-0CWNY9LQ1G.@8m=0qqk01wg.cyMLoJ2w!hTS'", 'unique': 'True', 'max_length': '100', 'db_index': 'True'}),
-            'client_secret': ('django.db.models.fields.CharField', [], {'default': "u'=Bq16eEDgabWpTR9FYz;ux.=@D58!o.xByHVRP4FH6f.Z;=:j3Algy4PYPARKnfmWNKA8ZjsL9?JA!TBagD7.ykES6JCo8CbV-eQGBTF0JeojoiZEFWlb0q-MRtocBok'", 'max_length': '255', 'db_index': 'True', 'blank': 'True'}),
-            'client_type': ('django.db.models.fields.CharField', [], {'max_length': '32'}),
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+        u'website.userdetail': {
+            'Meta': {'object_name': 'UserDetail'},
+            'company': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '256'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
-            'redirect_uris': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'skip_authorization': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True'}),
+            'password': ('django.db.models.fields.CharField', [], {'max_length': '128', 'null': 'True', 'blank': 'True'}),
+            'phone': ('django.db.models.fields.CharField', [], {'max_length': '12', 'null': 'True'}),
+            'server_count': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
         }
     }
 
-    complete_apps = ['example']
+    complete_apps = ['website']

@@ -11,7 +11,7 @@ import datetime
 def datetime_now():
     return datetime.datetime.now()
 
- class UserDetail(models.Model):
+class UserDetail(models.Model):
   email = models.EmailField(max_length=256, )
   password = models.CharField(max_length=128, null=True, blank=True)
   phone = models.CharField(max_length=12, null=True)
@@ -35,7 +35,7 @@ def datetime_now():
     self.user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)
 
 
- def activation_key_expired(self):
+  def activation_key_expired(self):
     expiration_date = datetime.timedelta(days=settings.ACCOUNT_ACTIVATION_DAYS)
     return self.activation_key == u"ALREADY_ACTIVATED" or \
           (self.user.date_joined + expiration_date <= datetime_now())

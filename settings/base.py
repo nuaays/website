@@ -211,8 +211,8 @@ USERS_EMAIL_CONFIRMATION_TIMEOUT_DAYS = 3
 # Specifies minimum length for passwords:
 USERS_PASSWORD_MIN_LENGTH = 5
      
- # Specifies maximum length for passwords:
- USERS_PASSWORD_MAX_LENGTH = None
+# Specifies maximum length for passwords:
+USERS_PASSWORD_MAX_LENGTH = None
       
 # the complexity validator, checks the password strength
 USERS_CHECK_PASSWORD_COMPLEXITY = True
