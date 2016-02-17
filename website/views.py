@@ -10,10 +10,25 @@ from django.core.context_processors import csrf
 from django.contrib.auth.models import User
 from django.db import transaction
 from models import UserDetail
+from django.conf import settings
+from django.views.generic.base import TemplateView
+
 import datetime
 
+
 def index(request):
-    return render_to_response('loginsight/index.html')
+    print 'settings.CLIENT_ID=', settings.CLIENT_ID
+    return render_to_response('loginsight/index.html', {'CLIENT_ID': settings.CLIENT_ID, 'OAUTH_TOKEN_SERVER': settings.OAUTH_TOKEN_SERVER})
+
+
+class HomeView(TemplateView):
+    template_name = "loginsight/index.html"
+
+    def get_context_data(self, **kwargs):
+        kwargs['CLIENT_ID'] = settings.CLIENT_ID
+        kwargs['OAUTH_SERVER'] = settings.OAUTH_SERVER
+        context = super(HomeView, self).get_context_data(**kwargs)
+        return context
 
 
 def about(request):

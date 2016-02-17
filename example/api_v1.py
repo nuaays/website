@@ -11,11 +11,10 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth.models import User
 from oauthlib import __version__ as OAUTHLIB_VERSION
 from oauthlib.oauth2 import Server
-from django.http import HttpResponseRedirect
 from .models import MyApplication
 from oauth2_provider.models import AccessToken
 
-from django.contrib.auth import login
+
 class MyServer(Server):
     """
     A custom server which bypasses OAuth controls for every GET request
@@ -57,9 +56,11 @@ def get_user_info(request, *args, **kwargs):
         token_obj = AccessToken.objects.get(token=token)
         user = User.objects.get(id=token_obj.user.id)
         data = serializers.serialize("json", [user])
-        # data = {'username': user.username, 'user_id': user.id,'email': user.email, 'password': user.password }
-        # return HttpResponse(data, content_type='application/json', status=200, *args, **kwargs)
         return HttpResponse(data, content_type='application/json', status=200, *args, **kwargs)
+
+
+def get_token(request, *args, **kwargs):
+    pass
 
 @csrf_exempt
 @protected_resource(server_cls=MyServer, scopes=["can_create_application"])

@@ -192,9 +192,16 @@ LOGGING = {
 
 
 OAUTH2_PROVIDER = {
-    'SCOPES': {'example': 'This is an example scope'},
-    'APPLICATION_MODEL': 'example.MyApplication'
+    'SCOPES': {'auth': 'access to loginsight'},
+    'APPLICATION_MODEL': 'example.MyApplication',
+    'REQUEST_APPROVAL_PROMPT': 'auto',
 }
+
+
+CLIENT_ID='L_Ja%21V13e%218pWJpWP%3FPE-metmZ%3FS0%3Bs%213XHgu%3Bok'
+CLIENT_SECRET=''
+OAUTH_SERVER="http://localhost:8000"
+
 
 from django.core.urlresolvers import reverse_lazy
 
