@@ -44,8 +44,9 @@ def refresh_access_token():
 
 if __name__ == "__main__":
     #用token来执行oauth api
+    refresh_access_token()
     access_token = get_access_token()
-
+    print 'access_token ====', access_token
     print '\n\nexcute api with token...'
     print '\n\n read groups...'
     headers = {"Authorization": access_token['token_type'] + " " + access_token['access_token']}

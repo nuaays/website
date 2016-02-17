@@ -129,3 +129,11 @@ def page_not_found(request):
 
 def page_error(request):
     return render_to_response('loginsight/500.html')
+
+from django.contrib.auth.decorators import login_required
+from django.http.response import HttpResponse
+
+@login_required()
+def secret_page(request, *args, **kwargs):
+    print 'hello world'
+    return HttpResponse('Secret contents!', status=200)

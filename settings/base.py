@@ -102,6 +102,20 @@ TEMPLATE_DIRS = (
 )
 
 
+AUTHENTICATION_BACKENDS = (
+    'oauth2_provider.backends.OAuth2Backend',
+    # Uncomment following if you want to access the admin
+    'django.contrib.auth.backends.ModelBackend'
+)
+
+REST_FRAMEWORK = {
+    # ...
+
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -109,9 +123,14 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'example.middleware.XsSharingMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',
+
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
     "django.core.context_processors.request",
@@ -136,6 +155,7 @@ INSTALLED_APPS = (
     'south',
     'example',
     'website',
+    'corsheaders',
 )
 
 # A sample logging configuration. The only tangible logging
