@@ -192,7 +192,7 @@ LOGGING = {
 
 
 OAUTH2_PROVIDER = {
-    'SCOPES': {'auth': 'access to loginsight'},
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'},
     'APPLICATION_MODEL': 'example.MyApplication',
     'REQUEST_APPROVAL_PROMPT': 'auto',
 }

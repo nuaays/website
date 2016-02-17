@@ -27,7 +27,7 @@ urlpatterns = patterns('',
                        ),
                        url(
                                regex=r'^$',
-                               view=TemplateView.as_view(template_name='loginsight/index.html'),
+                               view=HomeView.as_view(),
                                name='index'
                        ),
 

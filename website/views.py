@@ -27,6 +27,7 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         kwargs['CLIENT_ID'] = settings.CLIENT_ID
         kwargs['OAUTH_SERVER'] = settings.OAUTH_SERVER
+        print 'CLIENT_ID = ', kwargs['CLIENT_ID']
         context = super(HomeView, self).get_context_data(**kwargs)
         return context
 
