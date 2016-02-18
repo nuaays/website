@@ -47,13 +47,19 @@ if __name__ == "__main__":
     print 'headers = ', headers
     # r = requests.get(url="http://localhost:8000/api/0/groups", headers=headers)
     # print r.text
-    # r = requests.post(url="http://localhost:8000/api/0/agent/hosts",
-    #                   data={'host_name': 'xxx', 'host_type':'xxx', 'distver': '1.0', 'system': 'linux'},
-    #                   headers=headers)
+    r = requests.post(url="http://localhost:9000/api/0/agent/hosts",
+                      data={'host_name': '1xx2212rrrx', 'host_type':'xxx222rr', 'distver': '1.0', 'system': 'linux'},
+                      headers=headers)
+    print r
+    # r = requests.get(url="http://localhost:8000/api/0/hello", headers=headers)
     # print r.text
-    r = requests.get(url="http://localhost:8000/api/0/hello", headers=headers)
-    print r.text
-
-    # r = requests.get(url="http://localhost:8000/secret", headers=headers)
-    # print r.text
-
+    #
+    # r = requests.get(url="http://localhost:9000/api/0/agent/hello", headers=headers)
+    # # r = requests.get(url="http://localhost:8000/secret", headers=headers)
+    # print r.json()
+    #
+    # r = requests.get(url="http://localhost:8000/api/0/access_token", headers=headers)
+    # print r, r.text
+    #
+    # r = requests.get(url="http://localhost:9000/api/0/accesstoken", headers=headers)
+    # print r, r.text

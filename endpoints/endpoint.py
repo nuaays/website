@@ -14,7 +14,7 @@ from rest_framework.response import Response
 from rest_framework import permissions, viewsets
 from rest_framework.views import APIView
 from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasScope, OAuth2Authentication
-from endpoints.serializer import UserSerializer, GroupSerializer
+from endpoints.serializer import UserSerializer, GroupSerializer, AccessTokenSerializer
 from oauth2_provider.models import AccessToken
 import requests
 # ViewSets define the view behavior.
@@ -70,3 +70,17 @@ class HelloView(APIView):
 
     def get(self, request):
         return Response("hello world")
+
+
+class AccessTokenView(APIView):
+    authentication_classes = []
+    permission_classes = []
+    required_scopes = ['read']
+
+    def get(self, request):
+        authorization = request.META['HTTP_AUTHORIZATION']
+        token = authorization.split(" ")[1]
+        access_token = AccessToken.objects.get(token=token)
+        if access_token:
+            return Response({'user_id': access_token.user_id})
+        return Response({'ret': 'false'})
