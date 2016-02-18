@@ -47,4 +47,5 @@ urlpatterns = patterns('',
                        url(r'^logo', logo),
                        url(r'^ceshi', ceshi),
                        url(r'^secret$', secret_page, name='secret'),
+                       url(r'^check_access_token', validate_accesstoken, name='check-access-token'),
                        )

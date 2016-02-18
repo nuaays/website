@@ -8,11 +8,11 @@ from django.conf import settings
 from django.views.generic import View
 from django.core.context_processors import csrf
 from django.contrib.auth.models import User
-from django.db import transaction
 from models import UserDetail
 from django.conf import settings
 from django.views.generic.base import TemplateView
-
+from rest_framework import views
+from oauth2_provider.models import AccessToken
 import datetime
 
 
@@ -68,6 +68,7 @@ def check_email(request):
         return HttpResponse(True)
     else:
         return HttpResponse(False)
+
 
 def register(request):
     if request.method == 'POST':
@@ -137,3 +138,14 @@ from django.http.response import HttpResponse
 def secret_page(request, *args, **kwargs):
     print 'hello world'
     return HttpResponse('Secret contents!', status=200)
+
+@login_required()
+def validate_accesstoken(request):
+    if request.method == 'POST':
+        print 'FFF=', request.POST
+        access_token = request.POST.get('access_token', '')
+        t = AccessToken.objects.filter(token=access_token)
+        print 't ==== ', t
+        if t:
+            return HttpResponse(True)
+        return HttpResponse(False)

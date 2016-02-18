@@ -5,9 +5,11 @@ company: LogInsight
 email_ : wangh@loginsight.cn
 """
 
-from rest_framework import  routers
-from endpoints.endpoint import UserViewSet, GroupViewSet
+from django.conf.urls import patterns, url
+from endpoints.endpoint import HelloView, HostView
 # Routers provide an easy way of automatically determining the URL conf
-router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
-router.register(r'groups', GroupViewSet)
+
+urlpatterns = patterns('',
+                       url(r'^hello', HelloView.as_view(), name='hello'),
+                       url(r'^hosts', HostView.as_view(), name='host'),
+                       )
