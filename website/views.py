@@ -8,7 +8,7 @@ from django.conf import settings
 from django.views.generic import View
 from django.core.context_processors import csrf
 from django.contrib.auth.models import User
-from models import UserDetail
+from models import UserDetail, Organization
 from django.conf import settings
 from django.views.generic.base import TemplateView
 from rest_framework import views
@@ -70,6 +70,18 @@ def check_email(request):
         return HttpResponse(False)
 
 
+def check_sub_domain(request):
+    if request.method == 'GET':
+        sub_domain_name = request.GET.get('sub_domain_name')
+    if request.method == 'POST':
+        sub_domain_name = request.POST.get('sub_domain_name')
+    v = Organization.objects.filter(domain_name=sub_domain_name)
+    if len(v) == 0:
+        return HttpResponse(True)
+    else:
+        return HttpResponse(False)
+
+
 def register(request):
     if request.method == 'POST':
         name = request.POST.get('username', '')
@@ -97,6 +109,10 @@ def register(request):
                                       user=user)
 
             user_details.save()
+            # create organization
+            # get sentry instance from aliyun
+            # sentry api create organization
+
             return render_to_response("loginsight/signup-com.html")
 
         else:

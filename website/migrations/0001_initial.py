@@ -8,6 +8,15 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+        # Adding model 'Organization'
+        db.create_table(u'website_organization', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('organization_name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=128)),
+            ('domain_name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=256)),
+            ('sentry_instance', self.gf('django.db.models.fields.CharField')(unique=True, max_length=256)),
+        ))
+        db.send_create_signal(u'website', ['Organization'])
+
         # Adding model 'UserDetail'
         db.create_table(u'website_userdetail', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -18,11 +27,15 @@ class Migration(SchemaMigration):
             ('company', self.gf('django.db.models.fields.CharField')(max_length=256, null=True)),
             ('server_count', self.gf('django.db.models.fields.IntegerField')(null=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('organization', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['website.Organization'])),
         ))
         db.send_create_signal(u'website', ['UserDetail'])
 
 
     def backwards(self, orm):
+        # Deleting model 'Organization'
+        db.delete_table(u'website_organization')
+
         # Deleting model 'UserDetail'
         db.delete_table(u'website_userdetail')
 
@@ -64,12 +77,20 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
+        u'website.organization': {
+            'Meta': {'object_name': 'Organization'},
+            'domain_name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '256'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'organization_name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '128'}),
+            'sentry_instance': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '256'})
+        },
         u'website.userdetail': {
             'Meta': {'object_name': 'UserDetail'},
             'company': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '256'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True'}),
+            'organization': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['website.Organization']"}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128', 'null': 'True', 'blank': 'True'}),
             'phone': ('django.db.models.fields.CharField', [], {'max_length': '12', 'null': 'True'}),
             'server_count': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),

@@ -36,10 +36,10 @@ def refresh_access_token():
     print '\n\nrefresh access token...'
     # 刷新access token
     token = get_access_token()
+    headers = {"Authorization": "Basic " + base64.b64encode(CLIENT_ID + ":" + CLIENT_SECRET)}
     r = requests.post(url, data={'grant_type': 'refresh_token', 'refresh_token': token['refresh_token']}, headers=headers)
     token = r.json()
     return token
-
 
 if __name__ == "__main__":
     access_token = get_access_token()
@@ -51,8 +51,11 @@ if __name__ == "__main__":
                       data={'host_name': '1xx2212rrrx', 'host_type':'xxx222rr', 'distver': '1.0', 'system': 'linux'},
                       headers=headers)
     print r
-    # r = requests.get(url="http://localhost:8000/api/0/hello", headers=headers)
-    # print r.text
+
+
+    r = requests.get(url="http://localhost:8000/api/0/hello", headers=headers)
+    print r.text
+
     #
     # r = requests.get(url="http://localhost:9000/api/0/agent/hello", headers=headers)
     # # r = requests.get(url="http://localhost:8000/secret", headers=headers)
