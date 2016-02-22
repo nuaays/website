@@ -20,6 +20,11 @@ DATABASES = {}
 MANAGERS = ADMINS
 
 SENTRY_API = "http://localhost:9000/api/0"
+
+# aliyun secret key
+ALIYUN_ACCESS_KEY_ID = "7DifeHNHQxe5IIW5"
+ALIYUN_ACCESS_KEY_SECRET = "tJhvPpv4In1oeuSU79dtZcBAGHisPs"
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []

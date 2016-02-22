@@ -52,7 +52,6 @@ if __name__ == "__main__":
                       headers=headers)
     print r
 
-
     r = requests.get(url="http://localhost:8000/api/0/hello", headers=headers)
     print r.text
 

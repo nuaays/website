@@ -13,11 +13,11 @@ from django.conf import settings
 from django.views.generic.base import TemplateView
 from rest_framework import views
 from oauth2_provider.models import AccessToken
+from aliyun import AliyunSDK
 import datetime
 
 
 def index(request):
-    print 'settings.CLIENT_ID=', settings.CLIENT_ID
     return render_to_response('loginsight/index.html', {'CLIENT_ID': settings.CLIENT_ID, 'OAUTH_TOKEN_SERVER': settings.OAUTH_TOKEN_SERVER})
 
 
@@ -82,6 +82,10 @@ def check_sub_domain(request):
         return HttpResponse(False)
 
 
+def get_sentry_instance():
+    pass
+
+
 def register(request):
     if request.method == 'POST':
         name = request.POST.get('username', '')
@@ -90,7 +94,8 @@ def register(request):
         cellphone = request.POST.get('cellphone', '')
         companyName = request.POST.get('companyName', '')
         servercnt = request.POST.get('servercnt', '')
-
+        organization_name = companyName
+        sub_domain_name = request.POST.get('sub_domain_name', '')
         if not User.objects.filter(username=name):
             user = User(username=name,
                         email=email,
@@ -109,7 +114,12 @@ def register(request):
                                       user=user)
 
             user_details.save()
+            AliyunSDK.get
+
             # create organization
+            # sentry_instance_name = get
+            # org = Organization.objects.create(organization_name=organization_name, domain_name=sub_domain_name, sentry_instance=sentry_instance_name)
+
             # get sentry instance from aliyun
             # sentry api create organization
 

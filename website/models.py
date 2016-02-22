@@ -31,7 +31,7 @@ class UserDetail(models.Model):
     def send_activation_email(self, site):
         pass
 
-#
+
 # class SentryInstance(models):
 #     host_name = models.CharField(max_length=128,null=True)
 #     ip = models.CharField(max_length=50, null=True)
