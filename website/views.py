@@ -8,14 +8,16 @@ from django.conf import settings
 from django.views.generic import View
 from django.core.context_processors import csrf
 from django.contrib.auth.models import User
-from models import UserDetail, Organization
+from models import UserDetail, Organization, SentryInstance
 from django.conf import settings
 from django.views.generic.base import TemplateView
 from rest_framework import views
+from django.shortcuts import render
 from oauth2_provider.models import AccessToken
+from django.template import RequestContext
 from aliyun import AliyunSDK
 import datetime
-
+import random
 
 def index(request):
     return render_to_response('loginsight/index.html', {'CLIENT_ID': settings.CLIENT_ID, 'OAUTH_TOKEN_SERVER': settings.OAUTH_TOKEN_SERVER})
@@ -82,22 +84,34 @@ def check_sub_domain(request):
         return HttpResponse(False)
 
 
+def check_org_name(request):
+    if request.method == 'GET':
+        org_name = request.GET.get('companyName')
+    if request.method == 'POST':
+        org_name = request.POST.get('companyName')
+    v = Organization.objects.filter(organization_name=org_name)
+    if len(v) == 0:
+        return HttpResponse(True)
+    else:
+        return HttpResponse(False)
+
+
 def get_sentry_instance():
     pass
 
 
 def register(request):
     if request.method == 'POST':
-        name = request.POST.get('username', '')
+        username = request.POST.get('username', '')
         email = request.POST.get('email', '')
         password = request.POST.get('password', '')
         cellphone = request.POST.get('cellphone', '')
         companyName = request.POST.get('companyName', '')
         servercnt = request.POST.get('servercnt', '')
         organization_name = companyName
-        sub_domain_name = request.POST.get('sub_domain_name', '')
-        if not User.objects.filter(username=name):
-            user = User(username=name,
+        sub_domain_name = request.POST.get('sub_domain', '')
+        if not User.objects.filter(username=username):
+            user = User(username=username,
                         email=email,
                         is_superuser=False,
                         is_staff=True,
@@ -110,23 +124,55 @@ def register(request):
                                       company=companyName,
                                       password=password,
                                       server_count=servercnt,
-                                      name=name,
+                                      name=username,
                                       user=user)
 
-            user_details.save()
-            AliyunSDK.get
-
+            # user_details.save()
+            org = None
+            sentryInstance = SentryInstance()
+            instance_list = AliyunSDK.AliyunSDK.get_instances()
+            instance_list = instance_list['Instances']['Instance']
+            sentry_list = []
+            for e in instance_list:
+                if e['InstanceName'][:6] == settings.ALIYUN_ECS_SENTRY_INSTANCE_PREFIX:
+                    sentry_list.append(e)
+            sentry_count = len(sentry_list)
+            sentry_index = random.randint(0, sentry_count-1)
+            sentry_instance = sentry_list[sentry_index]
             # create organization
-            # sentry_instance_name = get
-            # org = Organization.objects.create(organization_name=organization_name, domain_name=sub_domain_name, sentry_instance=sentry_instance_name)
+            org_list = Organization.objects.filter(sentry_instance=sentry_instance['InstanceName'])
+            while len(org_list) >= settings.MAX_SENTRY_INSTANCE_COUNT:
+                sentry_index = random.randint(0, sentry_count-1)
+                sentry_instance = sentry_list[sentry_index]
+                org_list = Organization.objects.filter(sentry_instance=sentry_instance['InstanceName'])
 
-            # get sentry instance from aliyun
-            # sentry api create organization
+            # update sentry_instance model
+            sentry_ipaddress = sentry_instance['PublicIpAddress']['IpAddress'][0]
+            url_prefix = "http://%s:%s" % (sentry_ipaddress, settings.SENTRY_DEFALUT_PORT)
+            if not SentryInstance.objects.filter(sentry_instance_name=sentry_instance['InstanceName']):
+                sentryInstance = SentryInstance(sentry_instance_name=sentry_instance['InstanceName'],
+                                                sentry_instance_url_prefix=url_prefix)
+                sentryInstance.save()
+            domain_name = sub_domain_name + settings.DEFAULT_SUB_DOMAIN_SUFFIX
+            if not (Organization.objects.filter(organization_name=organization_name)
+                and Organization.objects.filter(sub_domain_name=domain_name)):
+                org = Organization(organization_name=organization_name,
+                                   domain_name=sub_domain_name + settings.DEFAULT_SUB_DOMAIN_SUFFIX,
+                                   sentry_instance=sentry_instance['InstanceName'])
+            else:
 
+                return render_to_response("loginsight/500.html")
+            user_details.save()
+            sentryInstance.save()
+            org.save()
+            # add domain record for Aliyun Wan network
+            resp = AliyunSDK.AliyunSDK.add_domain_record(domain_name=settings.OFFICIAL_DOMAIN_NAME, RR=domain_name, Type="A", Value=sentry_ipaddress)
+            print resp
             return render_to_response("loginsight/signup-com.html")
+            # return render("loginsight/signup-com.html")
 
         else:
-            return render_to_response('loginsight/signup-infor.html', {'msg': '账户名已存在'})
+            return render_to_response('loginsight/signup-infor.html',  context_instance=RequestContext(request))
     c = {}
     c.update(csrf(request))
     return render_to_response("loginsight/signup-infor.html", c)

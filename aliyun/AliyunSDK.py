@@ -17,11 +17,11 @@ class AliyunSDK:
     aliyun.setDefaultAppInfo(access_key_id, access_key_secret)
 
     @staticmethod
-    def get_instance_list(self):
-        a = aliyun.api.Ecs20130110DescribeInstanceStatusRequest()
-        a.PageNumber = 100
-        a.PageSize = 100
-        a.RegionId = "cn-qingdao"
+    def get_instances_status():
+        a = aliyun.api.Ecs20140526DescribeInstanceStatusRequest()
+        a.PageNumber = 1
+        a.PageSize = 10
+        a.RegionId = settings.ALIYUN_ECS_REGIONID
         f = a.getResponse()
         return f
 
@@ -32,5 +32,12 @@ class AliyunSDK:
         a.RR = kwargs['RR']
         a.Type = kwargs['Type']
         a.Value = kwargs['Value']
+        f = a.getResponse()
+        return f
+
+    @staticmethod
+    def get_instances():
+        a = aliyun.api.Ecs20140526DescribeInstancesRequest()
+        a.RegionId = settings.ALIYUN_ECS_REGIONID
         f = a.getResponse()
         return f

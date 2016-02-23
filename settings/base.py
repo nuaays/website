@@ -19,12 +19,17 @@ DATABASES = {}
 
 MANAGERS = ADMINS
 
+MAX_SENTRY_INSTANCE_COUNT = 20
+DEFAULT_SUB_DOMAIN_SUFFIX = ".loginsight.cn"
 SENTRY_API = "http://localhost:9000/api/0"
 
 # aliyun secret key
 ALIYUN_ACCESS_KEY_ID = "7DifeHNHQxe5IIW5"
 ALIYUN_ACCESS_KEY_SECRET = "tJhvPpv4In1oeuSU79dtZcBAGHisPs"
-
+ALIYUN_ECS_REGIONID = 'cn-qingdao'
+ALIYUN_ECS_SENTRY_INSTANCE_PREFIX = "sentry"
+SENTRY_DEFALUT_PORT = "8000"
+OFFICIAL_DOMAIN_NAME = "loginsight.cn"
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []

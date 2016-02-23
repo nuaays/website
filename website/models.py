@@ -15,7 +15,7 @@ def datetime_now():
 class Organization(models.Model):
     organization_name = models.CharField(max_length=128, unique=True)
     domain_name = models.CharField(max_length=256, unique=True)
-    sentry_instance = models.CharField(max_length=256, unique=True)
+    sentry_instance = models.CharField(max_length=256)
 
 
 class UserDetail(models.Model):
@@ -26,15 +26,13 @@ class UserDetail(models.Model):
     company = models.CharField(max_length=256, null=True)
     server_count = models.IntegerField(null=True)
     user = models.ForeignKey(User)
-    organization = models.ForeignKey(Organization)
+    org_name = models.CharField(max_length=128, null=True)
+    domain_name = models.CharField(max_length=128, null=True)
 
     def send_activation_email(self, site):
         pass
 
 
-# class SentryInstance(models):
-#     host_name = models.CharField(max_length=128,null=True)
-#     ip = models.CharField(max_length=50, null=True)
-#     url_prefix = models.CharField(max_length=256, null=True)
-#     # user = models.ForeignKey(User)
-#
+class SentryInstance(models.Model):
+    sentry_instance_name = models.CharField(max_length=128,null=True)
+    sentry_instance_url_prefix = models.CharField(max_length=250, null=True)
