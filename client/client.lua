@@ -18,7 +18,7 @@ local request_body = [[grant_type=password&username=wanghe&password=123]]
 local response_body = {}
 
 local res, code, response_headers = http.request{
-      url = "http://192.168.200.218:8000/o/token/",
+      url = "http://192.168.1.69:8000/o/token/",
       method = "POST",
       headers =
         {
