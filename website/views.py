@@ -13,12 +13,28 @@ from django.conf import settings
 from django.views.generic.base import TemplateView
 from rest_framework import views
 from django.shortcuts import render
+from oauth2_provider.generators import generate_client_id, generate_client_secret
 from website.vhost import VHost
 from oauth2_provider.models import AccessToken
+from example.models import MyApplication
 from django.template import RequestContext
 from aliyun import AliyunSDK
 import datetime
 import random
+
+
+def add_application(username, application_name):
+    user = User.objects.get(username=username)
+    if not user:
+        return
+    application = MyApplication(name=application_name,
+                                client_id=generate_client_id(),
+                                client_secret=generate_client_secret(),
+                                client_type="confidential",
+                                authorization_grant_type="password",
+                                user=user)
+    application.save()
+
 
 def index(request):
     return render_to_response('loginsight/index.html', {'CLIENT_ID': settings.CLIENT_ID, 'OAUTH_TOKEN_SERVER': settings.OAUTH_TOKEN_SERVER})
@@ -126,16 +142,17 @@ def register(request):
                                       password=password,
                                       server_count=servercnt,
                                       name=username,
+                                      org_name=organization_name,
+                                      domain_name=sub_domain_name,
                                       user=user)
 
-            # user_details.save()
             org = None
             sentryInstance = SentryInstance()
             instance_list = AliyunSDK.AliyunSDK.get_instances()
             instance_list = instance_list['Instances']['Instance']
             sentry_list = []
             for e in instance_list:
-                if e['InstanceName'][:6] == settings.ALIYUN_ECS_SENTRY_INSTANCE_PREFIX:
+                if e['InstanceName'][:len(settings.ALIYUN_ECS_SENTRY_INSTANCE_PREFIX)] == settings.ALIYUN_ECS_SENTRY_INSTANCE_PREFIX:
                     sentry_list.append(e)
             sentry_count = len(sentry_list)
             sentry_index = random.randint(0, sentry_count-1)
@@ -167,6 +184,7 @@ def register(request):
             user_details.save()
             sentryInstance.save()
             org.save()
+            add_application(user.username, "logagent")
             # add nginx vhost conf
             VHost.addVhostConf(domain=domain_name, organization=organization_name, sentry_url=url_prefix)
             VHost.reload_nginx()
@@ -177,7 +195,6 @@ def register(request):
                                                          Type="A",
                                                          Value=sentry_ipaddress)
             return render_to_response("loginsight/signup-com.html")
-            # return render("loginsight/signup-com.html")
 
         else:
             return render_to_response('loginsight/signup-infor.html',  context_instance=RequestContext(request))

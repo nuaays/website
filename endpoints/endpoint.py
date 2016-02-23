@@ -15,6 +15,9 @@ from rest_framework import permissions, viewsets
 from rest_framework.views import APIView
 from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasScope, OAuth2Authentication
 from endpoints.serializer import UserSerializer, GroupSerializer, AccessTokenSerializer
+from website.models import UserDetail, Organization, SentryInstance
+from example.models import MyApplication
+
 from oauth2_provider.models import AccessToken
 import requests
 # ViewSets define the view behavior.
@@ -39,7 +42,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 class HostView(APIView):
     authentication_classes = [OAuth2Authentication]
     permission_classes = [TokenHasScope]
-    required_scopes = ['write']
+    required_scopes = ['read']
     """
     url: /api/0/hosts
     method: POST
@@ -61,6 +64,20 @@ class HostView(APIView):
             url = settings.SENTRY_API + '/agent/hosts'
             r = requests.post(url=url, data=host_instance)
             return Response(r.text)
+
+    def get(self, request):
+        user_details = UserDetail.objects.get(name=request.user)
+        print 'user_details = ', user_details.org_name
+        pass
+        organization = Organization.objects.get(organization_name=user_details.org_name)
+        if not organization:
+            return Response({'msg': 'Failed'})
+        sentry_instance = SentryInstance.objects.get(sentry_instance_name=organization.sentry_instance)
+        if not sentry_instance:
+            return Response({'msg': 'Failed'})
+        return Response({'sentry_instance_name': sentry_instance.sentry_instance_name,
+                         'sentry_instancce_url_prefix': sentry_instance.sentry_instance_url_prefix
+                         })
 
 
 class HelloView(APIView):

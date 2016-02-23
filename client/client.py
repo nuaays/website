@@ -13,12 +13,12 @@ import requests
 from flask.ext.script import Manager, Command
 
 # 设置CLIENT_ID 和 CLIENT_SECRET 
-CLIENT_ID="QIC2k0tpZB_.yjgfC9-ks0WGDauRnmaM7F.gbzK9"
-CLIENT_SECRET="ZnFc8jL?uqnUxI6!;ZjCfhwKS@H0RtZV2=Iu;iHbMqtK5a@XcfQ3@3oD2FZh?tvahz?Qohz-Vnb2ECaNlJ4r_vwb@hXig;QNjydwAE4f5qx7L2D7BbXhZMVsdT?sNJQM"
+CLIENT_ID="6Ft0BOkiVfi74D.hiSX-OK=uBlhy7k=Mt2u=DsOa"
+CLIENT_SECRET="XqzcrIU@F4L-rXiF7K=2UlzrPh50KRCMojr_Ka4!:=v!yK;UOc0dLI8Ky5yzXQGTqM6pr_YGx@-U-?xeKVRRApuxxZGCJDa1x=;Of!sUmrOPa3hPtN!ky;01UX@CVnM7"
 
 # 用户名和密码
-username='wanghe'
-password = '123'
+username='hello10'
+password = '123qwe'
 url = "http://localhost:8000/o/token/"
 headers = {"Authorization": "Basic " + base64.b64encode(CLIENT_ID + ":" + CLIENT_SECRET)}
 
@@ -44,24 +44,25 @@ def refresh_access_token():
 if __name__ == "__main__":
     access_token = get_access_token()
     headers = {"Authorization": access_token['token_type'] + " " + access_token['access_token']}
-    print 'headers = ', headers
-    # r = requests.get(url="http://localhost:8000/api/0/groups", headers=headers)
-    # print r.text
-    r = requests.post(url="http://localhost:9000/api/0/agent/hosts",
-                      data={'host_name': '1xx2212rrrx', 'host_type':'xxx222rr', 'distver': '1.0', 'system': 'linux'},
-                      headers=headers)
-    print r
 
     r = requests.get(url="http://localhost:8000/api/0/hello", headers=headers)
     print r.text
 
-    #
-    # r = requests.get(url="http://localhost:9000/api/0/agent/hello", headers=headers)
-    # # r = requests.get(url="http://localhost:8000/secret", headers=headers)
+    r = requests.get(url="http://localhost:8000/secret", headers=headers)
+    print r.text
+
+    r = requests.get(url="http://localhost:8000/")
+    # 获取sentry 实例
+    r = requests.get(url="http://localhost:8000/api/0/hosts", headers=headers)
+    print r.json()
+    sentry_instance = r.json()
+    # 向sentry 实例注册主机
+    data = {'host_name': 'host111', 'host_type': 'web111', 'system': 'linux', 'distver': '1.0', 'mac_addr': "ff-cc-cd-20-21-21" }
+    SENTRY_URL_PREFIX = "http://localhost:9000"
+    # r = requests.post(url=sentry_instance['sentry_instancce_url_prefix'] + "/api/0/agent/hosts", data=data, headers=headers )
+    r = requests.post(url=SENTRY_URL_PREFIX + "/api/0/agent/hosts", data=data, headers=headers )
+    print r.json()
+    data = {'match_name': '^ff/aaafj/cc/aa/ccccc', 'stream_key': 'xx2222xxxxx', 'host_key': 'ed141f34521c9422eea23abb202beeee', 'alias_name': 'fff'}
+    r = requests.post(url=SENTRY_URL_PREFIX+"/api/0/agent/streams", data=data, headers=headers)
+    print r.text
     # print r.json()
-    #
-    # r = requests.get(url="http://localhost:8000/api/0/access_token", headers=headers)
-    # print r, r.text
-    #
-    # r = requests.get(url="http://localhost:9000/api/0/accesstoken", headers=headers)
-    # print r, r.text
