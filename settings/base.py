@@ -30,6 +30,10 @@ ALIYUN_ECS_REGIONID = 'cn-qingdao'
 ALIYUN_ECS_SENTRY_INSTANCE_PREFIX = "sentry"
 SENTRY_DEFALUT_PORT = "8000"
 OFFICIAL_DOMAIN_NAME = "loginsight.cn"
+
+# vhost for nginx conf
+NGINX_VHOST_CONF_DIR = "/usr/local/etc/nginx/site-enabled/"
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []

@@ -13,6 +13,7 @@ from django.conf import settings
 from django.views.generic.base import TemplateView
 from rest_framework import views
 from django.shortcuts import render
+from website.vhost import VHost
 from oauth2_provider.models import AccessToken
 from django.template import RequestContext
 from aliyun import AliyunSDK
@@ -160,14 +161,21 @@ def register(request):
                                    domain_name=sub_domain_name + settings.DEFAULT_SUB_DOMAIN_SUFFIX,
                                    sentry_instance=sentry_instance['InstanceName'])
             else:
-
                 return render_to_response("loginsight/500.html")
+
+            # save to database
             user_details.save()
             sentryInstance.save()
             org.save()
+            # add nginx vhost conf
+            VHost.addVhostConf(domain=domain_name, organization=organization_name, sentry_url=url_prefix)
+            VHost.reload_nginx()
+
             # add domain record for Aliyun Wan network
-            resp = AliyunSDK.AliyunSDK.add_domain_record(domain_name=settings.OFFICIAL_DOMAIN_NAME, RR=domain_name, Type="A", Value=sentry_ipaddress)
-            print resp
+            resp = AliyunSDK.AliyunSDK.add_domain_record(domain_name=settings.OFFICIAL_DOMAIN_NAME,
+                                                         RR=domain_name,
+                                                         Type="A",
+                                                         Value=sentry_ipaddress)
             return render_to_response("loginsight/signup-com.html")
             # return render("loginsight/signup-com.html")
 
