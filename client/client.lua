@@ -14,7 +14,8 @@ local head_data = base64.encode(CLIENT_ID..":"..CLIENT_SECRET)
 username = "wanghe"
 password = "123"
 
-local request_body = [[grant_type=password&username=wanghe&password=123]]
+--local request_body = [[grant_type=password&username=wanghe&password=123]]
+local request_body = "grant_type=password&username=wanghe&password=123"
 local response_body = {}
 
 local res, code, response_headers = http.request{
