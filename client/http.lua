@@ -33,7 +33,7 @@ exports.auth = function(user_name, passwd)
         url = "http://192.168.200.218:8000/o/token/",
         method = "POST",
         headers = {
-            --["Content-Type"] = "application/x-www-form-urlencode";
+            --["Content-Type"] = "application/x-www-form-urlencoded";
 						--["Content-Length"] = #send_data;
             ["Authorization"] = "Basic "..head_data;
         },
