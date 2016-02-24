@@ -147,13 +147,14 @@ def register(request):
                                       user=user)
 
             org = None
-            sentryInstance = SentryInstance()
+            sentryInstance = None
             instance_list = AliyunSDK.AliyunSDK.get_instances()
             instance_list = instance_list['Instances']['Instance']
             sentry_list = []
             for e in instance_list:
                 if e['InstanceName'][:len(settings.ALIYUN_ECS_SENTRY_INSTANCE_PREFIX)] == settings.ALIYUN_ECS_SENTRY_INSTANCE_PREFIX:
                     sentry_list.append(e)
+            print 'sentry instance count: ', len(sentry_list)
             sentry_count = len(sentry_list)
             sentry_index = random.randint(0, sentry_count-1)
             sentry_instance = sentry_list[sentry_index]
@@ -166,11 +167,14 @@ def register(request):
 
             # update sentry_instance model
             sentry_ipaddress = sentry_instance['PublicIpAddress']['IpAddress'][0]
+            print 'ipaddress = ', sentry_ipaddress
             url_prefix = "http://%s:%s" % (sentry_ipaddress, settings.SENTRY_DEFALUT_PORT)
-            if not SentryInstance.objects.filter(sentry_instance_name=sentry_instance['InstanceName']):
-                sentryInstance = SentryInstance(sentry_instance_name=sentry_instance['InstanceName'],
+            se_inst = SentryInstance.objects.filter(sentry_instance_name=sentry_instance['InstanceName'])
+            if not se_inst:
+                print 'sentry_instance_name = ', sentry_instance['InstanceName']
+                sentryInstance = SentryInstance.objects.create(sentry_instance_name=sentry_instance['InstanceName'],
                                                 sentry_instance_url_prefix=url_prefix)
-                sentryInstance.save()
+
             domain_name = sub_domain_name + settings.DEFAULT_SUB_DOMAIN_SUFFIX
             if not (Organization.objects.filter(organization_name=organization_name)
                 and Organization.objects.filter(sub_domain_name=domain_name)):
@@ -182,9 +186,7 @@ def register(request):
 
             # save to database
             user_details.save()
-            sentryInstance.save()
             org.save()
-            add_application(user.username, "logagent")
             # add nginx vhost conf
             VHost.addVhostConf(domain=domain_name, organization=organization_name, sentry_url=url_prefix)
             VHost.reload_nginx()
@@ -242,7 +244,6 @@ def validate_accesstoken(request):
         print 'FFF=', request.POST
         access_token = request.POST.get('access_token', '')
         t = AccessToken.objects.filter(token=access_token)
-        print 't ==== ', t
         if t:
             return HttpResponse(True)
         return HttpResponse(False)

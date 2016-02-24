@@ -34,5 +34,7 @@ class UserDetail(models.Model):
 
 
 class SentryInstance(models.Model):
-    sentry_instance_name = models.CharField(max_length=128,null=True)
-    sentry_instance_url_prefix = models.CharField(max_length=250, null=True)
+    sentry_instance_name = models.CharField(max_length=128, unique=True)
+    sentry_instance_url_prefix = models.CharField(max_length=250)
+    client_id = models.CharField(max_length=512, null=True)
+    client_secret = models.CharField(max_length=512, null=True)

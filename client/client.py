@@ -13,11 +13,18 @@ import requests
 from flask.ext.script import Manager, Command
 
 # 设置CLIENT_ID 和 CLIENT_SECRET 
-CLIENT_ID="6Ft0BOkiVfi74D.hiSX-OK=uBlhy7k=Mt2u=DsOa"
-CLIENT_SECRET="XqzcrIU@F4L-rXiF7K=2UlzrPh50KRCMojr_Ka4!:=v!yK;UOc0dLI8Ky5yzXQGTqM6pr_YGx@-U-?xeKVRRApuxxZGCJDa1x=;Of!sUmrOPa3hPtN!ky;01UX@CVnM7"
+# CLIENT_ID="6Ft0BOkiVfi74D.hiSX-OK=uBlhy7k=Mt2u=DsOa"
+# CLIENT_SECRET="XqzcrIU@F4L-rXiF7K=2UlzrPh50KRCMojr_Ka4!:=v!yK;UOc0dLI8Ky5yzXQGTqM6pr_YGx@-U-?xeKVRRApuxxZGCJDa1x=;Of!sUmrOPa3hPtN!ky;01UX@CVnM7"
+
+
+CLIENT_ID="WaoWqdWg;QWou;SJy-rVGigJb?;_U1oxPC=IbAak"
+CLIENT_SECRET="-mAiX?zGEmdz-=lAFhCuUSrCj=LWXF0LhS9pO=57_6gPnYR=kQC0V95yJ2NMwmn.!zI9rTF6lVnwowdv-lIp-ZSgEB@gc!LmF=3cQ1iFTen5m8=d;HuZh!ThogUpycJ0"
 
 # 用户名和密码
-username='hello10'
+# username='wanghe'
+# password = '123'
+
+username = 'hello10'
 password = '123qwe'
 url = "http://localhost:8000/o/token/"
 headers = {"Authorization": "Basic " + base64.b64encode(CLIENT_ID + ":" + CLIENT_SECRET)}
@@ -58,11 +65,9 @@ if __name__ == "__main__":
     sentry_instance = r.json()
     # 向sentry 实例注册主机
     data = {'host_name': 'host111', 'host_type': 'web111', 'system': 'linux', 'distver': '1.0', 'mac_addr': "ff-cc-cd-20-21-21" }
-    SENTRY_URL_PREFIX = "http://localhost:9000"
-    # r = requests.post(url=sentry_instance['sentry_instancce_url_prefix'] + "/api/0/agent/hosts", data=data, headers=headers )
+    SENTRY_URL_PREFIX = "http://192.168.200.224:9000"
     r = requests.post(url=SENTRY_URL_PREFIX + "/api/0/agent/hosts", data=data, headers=headers )
-    print r.json()
+    print r.text
     data = {'match_name': '^ff/aaafj/cc/aa/ccccc', 'stream_key': 'xx2222xxxxx', 'host_key': 'ed141f34521c9422eea23abb202beeee', 'alias_name': 'fff'}
     r = requests.post(url=SENTRY_URL_PREFIX+"/api/0/agent/streams", data=data, headers=headers)
-    print r.text
-    # print r.json()
+    print r.json()
