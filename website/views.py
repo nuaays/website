@@ -18,7 +18,10 @@ from website.vhost import VHost
 from oauth2_provider.models import AccessToken
 from example.models import MyApplication
 from django.template import RequestContext
+from django.core.exceptions import ObjectDoesNotExist
 from aliyun import AliyunSDK
+from website.models import Organization, SentryInstance, UserDetail, User
+from oauth2_provider.compat import urlencode
 import datetime
 import random
 
@@ -37,19 +40,36 @@ def add_application(username, application_name):
 
 
 def index(request):
-    return render_to_response('loginsight/index.html', {'CLIENT_ID': settings.CLIENT_ID, 'OAUTH_TOKEN_SERVER': settings.OAUTH_TOKEN_SERVER})
+    return render_to_response('loginsight/index.html', {'CLIENT_ID': settings.CLIENT_ID,
+                                                        'OAUTH_TOKEN_SERVER': settings.OAUTH_TOKEN_SERVER})
 
 
 class HomeView(TemplateView):
     template_name = "loginsight/index.html"
 
     def get_context_data(self, **kwargs):
-        kwargs['CLIENT_ID'] = settings.CLIENT_ID
-        kwargs['OAUTH_SERVER'] = settings.OAUTH_SERVER
-        print 'CLIENT_ID = ', kwargs['CLIENT_ID']
+        sentry_instance = None
+        try:
+            user = UserDetail.objects.get(name=self.request.user.username)
+            organization = Organization.objects.get(organization_name=user.org_name)
+            sentry_instance = SentryInstance.objects.get(sentry_instance_name=organization.sentry_instance)
+            print sentry_instance
+        except ObjectDoesNotExist:
+            pass
+        # sentry_instance
+        # print 'org_name===', user.org_name
+        # print sentry_instance
+        if sentry_instance is None:
+            client_id = settings.CLIENT_ID
+        else:
+            client_id = sentry_instance.client_id
+        client_id = "ZvwRr6t?WkzuHO5htOkCjti-FHL=Ri5DsA!;6qWX"
+        kwargs['CLIENT_ID'] = urlencode({'client_id': client_id})
+
+        kwargs['OAUTH_SERVER'] = "http://localhost:8000"
+
         context = super(HomeView, self).get_context_data(**kwargs)
         return context
-
 
 def about(request):
     return render_to_response('loginsight/about.html')
