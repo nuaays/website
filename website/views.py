@@ -56,20 +56,18 @@ class HomeView(TemplateView):
             print sentry_instance
         except ObjectDoesNotExist:
             pass
-        # sentry_instance
-        # print 'org_name===', user.org_name
-        # print sentry_instance
-        if sentry_instance is None:
-            client_id = settings.CLIENT_ID
+
+        if settings.DEBUG:
+            client_id = "ZvwRr6t?WkzuHO5htOkCjti-FHL=Ri5DsA!;6qWX"
         else:
             client_id = sentry_instance.client_id
-        client_id = "ZvwRr6t?WkzuHO5htOkCjti-FHL=Ri5DsA!;6qWX"
         kwargs['CLIENT_ID'] = urlencode({'client_id': client_id})
 
         kwargs['OAUTH_SERVER'] = "http://localhost:8000"
 
         context = super(HomeView, self).get_context_data(**kwargs)
         return context
+
 
 def about(request):
     return render_to_response('loginsight/about.html')
