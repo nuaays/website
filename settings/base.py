@@ -19,6 +19,26 @@ DATABASES = {}
 
 MANAGERS = ADMINS
 
+MAX_SENTRY_INSTANCE_COUNT = 20
+DEFAULT_SUB_DOMAIN_SUFFIX = ".loginsight.cn"
+SENTRY_API = "http://localhost:9000/api/0"
+
+# aliyun secret key
+ALIYUN_ACCESS_KEY_ID = "7DifeHNHQxe5IIW5"
+ALIYUN_ACCESS_KEY_SECRET = "tJhvPpv4In1oeuSU79dtZcBAGHisPs"
+ALIYUN_ECS_REGIONID = 'cn-qingdao'
+ALIYUN_ECS_SENTRY_INSTANCE_PREFIX = "sentry"
+SENTRY_DEFALUT_PORT = "9000"
+OFFICIAL_DOMAIN_NAME = "loginsight.cn"
+
+# vhost for nginx conf
+NGINX_VHOST_CONF_DIR = "/usr/local/etc/nginx/site-enabled/"
+
+# logagent default client_id and client_secret
+LOGAGENT_CLIENT_ID = '1S_wRvye9?Xq4mU91e!MPixJ9Qjl3yQIaW?7G=2j'
+LOGAGENT_CLIENT_SECRET = 'hLXU?HCktQu::1xz9EsjWMUq:yiLp2A=SgQpH4HKTgM4zFS@WMQjFtVGSYV.gu6wC!6UCgfxSqyzKUZWymuyQq_lUGQH;Udmhy3gvAQ73GNF3HXgzT94YkNP0RvIx:m1'
+
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
@@ -27,7 +47,7 @@ ALLOWED_HOSTS = []
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Asia/Shanghai'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -102,6 +122,21 @@ TEMPLATE_DIRS = (
 )
 
 
+AUTHENTICATION_BACKENDS = (
+    'oauth2_provider.backends.OAuth2Backend',
+    # Uncomment following if you want to access the admin
+    'django.contrib.auth.backends.ModelBackend'
+)
+
+REST_FRAMEWORK = {
+    # ...
+
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+
+    )
+}
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -109,9 +144,14 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'example.middleware.XsSharingMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',
+
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
     "django.core.context_processors.request",
@@ -136,6 +176,7 @@ INSTALLED_APPS = (
     'south',
     'example',
     'website',
+    'corsheaders',
 )
 
 # A sample logging configuration. The only tangible logging

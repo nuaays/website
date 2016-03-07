@@ -13,6 +13,7 @@ from oauthlib import __version__ as OAUTHLIB_VERSION
 from oauthlib.oauth2 import Server
 from .models import MyApplication
 from oauth2_provider.models import AccessToken
+from website.models import UserDetail
 
 
 class MyServer(Server):
@@ -55,7 +56,8 @@ def get_user_info(request, *args, **kwargs):
         token = request.POST.get('token')
         token_obj = AccessToken.objects.get(token=token)
         user = User.objects.get(id=token_obj.user.id)
-        data = serializers.serialize("json", [user])
+        user_detail = UserDetail.objects.get(name=user.username)
+        data = serializers.serialize("json", [user, user_detail])
         return HttpResponse(data, content_type='application/json', status=200, *args, **kwargs)
 
 

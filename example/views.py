@@ -115,3 +115,4 @@ class ApiEndpoint(ProtectedResourceView):
         data = {'username': user.username, 'user_id': request.user.id,'email': user.email, 'session': request.session['_auth_user_id'] }
         return HttpResponse(str(data))
 
+

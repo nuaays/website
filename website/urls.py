@@ -17,24 +17,24 @@ urlpatterns = patterns('',
 
                        # url(r'^$', index, ),
                        url(r'^index', index),
-                       url(r'register', register),
+                       url('register', register),
                        url(r'^about', about),
                        url(r'^contact', contact_us),
                        url(
-                               regex=r'^login',
-                               view='django.contrib.auth.views.login',
-                               kwargs={'template_name': 'loginsight/login.html'}
+                           regex=r'^login',
+                           view='django.contrib.auth.views.login',
+                           kwargs={'template_name': 'loginsight/login.html'}
                        ),
                        url(
-                               regex=r'^$',
-                               view=HomeView.as_view(),
-                               name='index'
+                           regex=r'^$',
+                           view=HomeView.as_view(),
+                           name='index'
                        ),
 
                        url(
-                               regex='^accounts/logout/$',
-                               view='django.contrib.auth.views.logout',
-                               kwargs={'next_page': reverse_lazy('index')}
+                           regex='^accounts/logout/$',
+                           view='django.contrib.auth.views.logout',
+                           kwargs={'next_page': reverse_lazy('index')}
                        ),
 
                        url(r'^price', price),
@@ -46,4 +46,6 @@ urlpatterns = patterns('',
                        url(r'^404', f404),
                        url(r'^logo', logo),
                        url(r'^ceshi', ceshi),
+                       url(r'^secret$', secret_page, name='secret'),
+                       url(r'^check_access_token', validate_accesstoken, name='check-access-token'),
                        )
