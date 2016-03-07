@@ -63,7 +63,7 @@ class HomeView(TemplateView):
             client_id = sentry_instance.client_id
         kwargs['CLIENT_ID'] = urlencode({'client_id': client_id})
 
-        kwargs['OAUTH_SERVER'] = "http://localhost:8000"
+        kwargs['OAUTH_SERVER'] = settings.OAUTH_SERVER
 
         context = super(HomeView, self).get_context_data(**kwargs)
         return context

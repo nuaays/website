@@ -38,6 +38,7 @@ NGINX_VHOST_CONF_DIR = "/usr/local/etc/nginx/site-enabled/"
 LOGAGENT_CLIENT_ID = '1S_wRvye9?Xq4mU91e!MPixJ9Qjl3yQIaW?7G=2j'
 LOGAGENT_CLIENT_SECRET = 'hLXU?HCktQu::1xz9EsjWMUq:yiLp2A=SgQpH4HKTgM4zFS@WMQjFtVGSYV.gu6wC!6UCgfxSqyzKUZWymuyQq_lUGQH;Udmhy3gvAQ73GNF3HXgzT94YkNP0RvIx:m1'
 
+OAUTH_SERVER = "http://192.168.1.69"
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
