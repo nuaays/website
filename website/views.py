@@ -54,16 +54,15 @@ class HomeView(TemplateView):
             organization = Organization.objects.get(organization_name=user.org_name)
             sentry_instance = SentryInstance.objects.get(sentry_instance_name=organization.sentry_instance)
             print sentry_instance
+            if settings.DEBUG:
+                client_id = "ZvwRr6t?WkzuHO5htOkCjti-FHL=Ri5DsA!;6qWX"
+            else:
+                client_id = sentry_instance.client_id
+            kwargs['CLIENT_ID'] = urlencode({'client_id': client_id})
+
+            kwargs['OAUTH_SERVER'] = settings.OAUTH_SERVER
         except ObjectDoesNotExist:
             pass
-
-        if settings.DEBUG:
-            client_id = "ZvwRr6t?WkzuHO5htOkCjti-FHL=Ri5DsA!;6qWX"
-        else:
-            client_id = sentry_instance.client_id
-        kwargs['CLIENT_ID'] = urlencode({'client_id': client_id})
-
-        kwargs['OAUTH_SERVER'] = settings.OAUTH_SERVER
 
         context = super(HomeView, self).get_context_data(**kwargs)
         return context
@@ -206,8 +205,8 @@ def register(request):
             user_details.save()
             org.save()
             # add nginx vhost conf
-            VHost.addVhostConf(domain=domain_name, organization=organization_name, sentry_url=url_prefix)
-            VHost.reload_nginx()
+            # VHost.addVhostConf(domain=domain_name, organization=organization_name, sentry_url=url_prefix)
+            # VHost.reload_nginx()
 
             # add domain record for Aliyun Wan network
             resp = AliyunSDK.AliyunSDK.add_domain_record(domain_name=settings.OFFICIAL_DOMAIN_NAME,
