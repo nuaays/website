@@ -37,6 +37,9 @@ NGINX_VHOST_CONF_DIR = "/usr/local/etc/nginx/site-enabled/"
 # logagent default client_id and client_secret
 LOGAGENT_CLIENT_ID = '1S_wRvye9?Xq4mU91e!MPixJ9Qjl3yQIaW?7G=2j'
 LOGAGENT_CLIENT_SECRET = 'hLXU?HCktQu::1xz9EsjWMUq:yiLp2A=SgQpH4HKTgM4zFS@WMQjFtVGSYV.gu6wC!6UCgfxSqyzKUZWymuyQq_lUGQH;Udmhy3gvAQ73GNF3HXgzT94YkNP0RvIx:m1'
+DEFALUT_SENTRY_CLIENT_ID = 'ZvwRr6t?WkzuHO5htOkCjti-FHL=Ri5DsA!;6qWX'
+DEFAULT_SENTRY_CLIENT_SECRET = 'ASzRYogeWgVasXPXsbpBAPTBYEXHiNjITAQBngM;TMmtH=xj1m7Lx33WNW99E9ozCEi88flhazxupg4Cr?:x=bbfZ=ih9;Fo7J6jjNc6jRZ9Q:CLOqB2dN!zv@lQz!=T'
+
 
 OAUTH_SERVER = "http://192.168.1.69"
 

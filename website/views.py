@@ -48,7 +48,6 @@ class HomeView(TemplateView):
     template_name = "loginsight/index.html"
 
     def get_context_data(self, **kwargs):
-        sentry_instance = None
         try:
             user = UserDetail.objects.get(name=self.request.user.username)
             organization = Organization.objects.get(organization_name=user.org_name)

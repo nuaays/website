@@ -48,8 +48,10 @@ def create_sentry_application(sentry_instance):
     if not sentry_instance:
         return
     name = sentry_instance['InstanceName']
-    client_id = generators.generate_client_id()
-    client_secret = generators.generate_client_secret()
+    # client_id = generators.generate_client_id()
+    # client_secret = generators.generate_client_secret()
+    client_id = settings.DEFALUT_SENTRY_CLIENT_ID
+    client_secret = settings.DEFAULT_SENTRY_CLIENT_SECRET
     authorization_grant_type = Application.GRANT_AUTHORIZATION_CODE
     client_type = Application.CLIENT_PUBLIC
     redirect_url = "http://%s/oauth/consumer/exchange/" % (sentry_instance['sentry_ipaddress'],)
