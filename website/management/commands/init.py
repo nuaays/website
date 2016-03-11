@@ -32,7 +32,7 @@ def update_sentry_instances():
     for sentry_instance in sentry_list:
         # update sentry_instance model
         sentry_ipaddress = sentry_instance['PublicIpAddress']['IpAddress'][0]
-        url_prefix = "http://%s:%s" % (sentry_ipaddress, settings.SENTRY_DEFALUT_PORT)
+        url_prefix = "http://%s" % (sentry_ipaddress,)
         se_inst = SentryInstance.objects.filter(sentry_instance_name=sentry_instance['InstanceName'])
         if not se_inst:
             sentry_instance['sentry_ipaddress'] = sentry_ipaddress
@@ -48,10 +48,12 @@ def create_sentry_application(sentry_instance):
     if not sentry_instance:
         return
     name = sentry_instance['InstanceName']
-    # client_id = generators.generate_client_id()
-    # client_secret = generators.generate_client_secret()
-    client_id = settings.DEFALUT_SENTRY_CLIENT_ID
-    client_secret = settings.DEFAULT_SENTRY_CLIENT_SECRET
+    client_id = generators.generate_client_id()
+    client_secret = generators.generate_client_secret()
+    #client_id = settings.DEFALUT_SENTRY_CLIENT_ID
+    #client_secret = settings.DEFAULT_SENTRY_CLIENT_SECRET
+    print 'client-id=', client_id
+    print 'client_secret=', client_secret
     authorization_grant_type = Application.GRANT_AUTHORIZATION_CODE
     client_type = Application.CLIENT_PUBLIC
     redirect_url = "http://%s/oauth/consumer/exchange/" % (sentry_instance['sentry_ipaddress'],)

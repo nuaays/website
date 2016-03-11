@@ -24,8 +24,8 @@ DEFAULT_SUB_DOMAIN_SUFFIX = ".loginsight.cn"
 SENTRY_API = "http://localhost:9000/api/0"
 
 # aliyun secret key
-ALIYUN_ACCESS_KEY_ID = "7DifeHNHQxe5IIW5"
-ALIYUN_ACCESS_KEY_SECRET = "tJhvPpv4In1oeuSU79dtZcBAGHisPs"
+ALIYUN_ACCESS_KEY_ID = "lCExh2jxbsKO3Bmv"
+ALIYUN_ACCESS_KEY_SECRET = "k7GhjfT0OYY3AY9zDC1Tc2W1QAo67F"
 ALIYUN_ECS_REGIONID = 'cn-qingdao'
 ALIYUN_ECS_SENTRY_INSTANCE_PREFIX = "sentry"
 SENTRY_DEFALUT_PORT = "9000"
@@ -41,7 +41,7 @@ DEFALUT_SENTRY_CLIENT_ID = 'ZvwRr6t?WkzuHO5htOkCjti-FHL=Ri5DsA!;6qWX'
 DEFAULT_SENTRY_CLIENT_SECRET = 'ASzRYogeWgVasXPXsbpBAPTBYEXHiNjITAQBngM;TMmtH=xj1m7Lx33WNW99E9ozCEi88flhazxupg4Cr?:x=bbfZ=ih9;Fo7J6jjNc6jRZ9Q:CLOqB2dN!zv@lQz!=T'
 
 
-OAUTH_SERVER = "http://192.168.1.69"
+OAUTH_SERVER = "http://139.129.92.100"
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -245,7 +245,6 @@ OAUTH2_PROVIDER = {
 
 CLIENT_ID='L_Ja%21V13e%218pWJpWP%3FPE-metmZ%3FS0%3Bs%213XHgu%3Bok'
 CLIENT_SECRET=''
-OAUTH_SERVER="http://localhost:8000"
 
 
 from django.core.urlresolvers import reverse_lazy
