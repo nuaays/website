@@ -41,7 +41,70 @@ DEFALUT_SENTRY_CLIENT_ID = 'ZvwRr6t?WkzuHO5htOkCjti-FHL=Ri5DsA!;6qWX'
 DEFAULT_SENTRY_CLIENT_SECRET = 'ASzRYogeWgVasXPXsbpBAPTBYEXHiNjITAQBngM;TMmtH=xj1m7Lx33WNW99E9ozCEi88flhazxupg4Cr?:x=bbfZ=ih9;Fo7J6jjNc6jRZ9Q:CLOqB2dN!zv@lQz!=T'
 
 
-OAUTH_SERVER = "http://139.129.92.100"
+OAUTH_SERVER = "http://localhost:8000"
+
+
+SENTRY_INSTANCES = [
+    'app.loginsight.cn',
+]
+
+SENTRY_DEFAULT_ROLE = 'member'
+
+AUTH_USER_MODEL = 'website.User'
+
+# Roles are ordered, which represents a sort-of hierarchy, as well as how
+# they're presented in the UI. This is primarily important in that a member
+# that is earlier in the chain cannot manage the settings of a member later
+# in the chain (they still require the appropriate scope).
+SENTRY_ROLES = (
+    {
+        'id': 'member',
+        'name': 'Member',
+        'desc': 'Members can view and act on events, as well as view most other data within the organization.',
+        'scopes': set([
+            'event:read', 'event:write', 'event:delete',
+            'project:read', 'org:read', 'member:read', 'team:read',
+        ]),
+    },
+    {
+        'id': 'admin',
+        'name': 'Admin',
+        'desc': 'Admin privileges on any teams of which they\'re a member. They can create new teams and projects, as well as remove teams and projects which they already hold membership on.',
+        'scopes': set([
+            'event:read', 'event:write', 'event:delete',
+            'org:read', 'member:read',
+            'project:read', 'project:write', 'project:delete',
+            'team:read', 'team:write', 'team:delete',
+        ]),
+    },
+    {
+        'id': 'manager',
+        'name': 'Manager',
+        'desc': 'Gains admin access on all teams as well as the ability to add and remove members.',
+        'is_global': True,
+        'scopes': set([
+            'event:read', 'event:write', 'event:delete',
+            'member:read', 'member:write', 'member:delete',
+            'project:read', 'project:write', 'project:delete',
+            'team:read', 'team:write', 'team:delete',
+            'org:read', 'org:write',
+        ]),
+    },
+    {
+        'id': 'owner',
+        'name': 'Owner',
+        'desc': 'Gains full permission across the organization. Can manage members as well as perform catastrophic operations such as removing the organization.',
+        'is_global': True,
+        'scopes': set([
+            'org:read', 'org:write', 'org:delete',
+            'member:read', 'member:write', 'member:delete',
+            'team:read', 'team:write', 'team:delete',
+            'project:read', 'project:write', 'project:delete',
+            'event:read', 'event:write', 'event:delete',
+        ]),
+    },
+)
+
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
