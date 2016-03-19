@@ -50,7 +50,6 @@ SENTRY_INSTANCES = [
 
 SENTRY_DEFAULT_ROLE = 'member'
 
-AUTH_USER_MODEL = 'website.User'
 
 # Roles are ordered, which represents a sort-of hierarchy, as well as how
 # they're presented in the UI. This is primarily important in that a member

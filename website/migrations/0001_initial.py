@@ -13,7 +13,7 @@ class Migration(SchemaMigration):
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('organization_name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=128)),
             ('domain_name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=256)),
-            ('sentry_instance', self.gf('django.db.models.fields.CharField')(unique=True, max_length=256)),
+            ('sentry_instance', self.gf('django.db.models.fields.CharField')(max_length=256)),
         ))
         db.send_create_signal(u'website', ['Organization'])
 
@@ -35,8 +35,10 @@ class Migration(SchemaMigration):
         # Adding model 'SentryInstance'
         db.create_table(u'website_sentryinstance', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('sentry_instance_name', self.gf('django.db.models.fields.CharField')(max_length=128, null=True)),
-            ('sentry_instance_url_prefix', self.gf('django.db.models.fields.CharField')(max_length=250, null=True)),
+            ('sentry_instance_name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=128)),
+            ('sentry_instance_url_prefix', self.gf('django.db.models.fields.CharField')(max_length=250)),
+            ('client_id', self.gf('django.db.models.fields.CharField')(max_length=512, null=True)),
+            ('client_secret', self.gf('django.db.models.fields.CharField')(max_length=512, null=True)),
         ))
         db.send_create_signal(u'website', ['SentryInstance'])
 
@@ -94,13 +96,15 @@ class Migration(SchemaMigration):
             'domain_name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '256'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'organization_name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '128'}),
-            'sentry_instance': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '256'})
+            'sentry_instance': ('django.db.models.fields.CharField', [], {'max_length': '256'})
         },
         u'website.sentryinstance': {
             'Meta': {'object_name': 'SentryInstance'},
+            'client_id': ('django.db.models.fields.CharField', [], {'max_length': '512', 'null': 'True'}),
+            'client_secret': ('django.db.models.fields.CharField', [], {'max_length': '512', 'null': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'sentry_instance_name': ('django.db.models.fields.CharField', [], {'max_length': '128', 'null': 'True'}),
-            'sentry_instance_url_prefix': ('django.db.models.fields.CharField', [], {'max_length': '250', 'null': 'True'})
+            'sentry_instance_name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '128'}),
+            'sentry_instance_url_prefix': ('django.db.models.fields.CharField', [], {'max_length': '250'})
         },
         u'website.userdetail': {
             'Meta': {'object_name': 'UserDetail'},

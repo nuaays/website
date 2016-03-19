@@ -13,7 +13,7 @@ from oauthlib import __version__ as OAUTHLIB_VERSION
 from oauthlib.oauth2 import Server
 from .models import MyApplication
 from oauth2_provider.models import AccessToken
-from website.models.user_details import UserDetail
+from website.models import UserDetail
 
 
 class MyServer(Server):

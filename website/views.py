@@ -7,8 +7,8 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.views.generic import View
 from django.core.context_processors import csrf
-# from django.contrib.auth.models import User
-# from models import UserDetail, Organization, SentryInstance
+from django.contrib.auth.models import User
+from models import UserDetail, Organization, SentryInstance
 from django.conf import settings
 from django.views.generic.base import TemplateView
 from rest_framework import views
@@ -22,11 +22,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from aliyun import AliyunSDK
 # from website.models import Organization, SentryInstance, UserDetail, User
 from oauth2_provider.compat import urlencode
-from website.models.user_details import UserDetail
-from website.models.organization import Organization
-from website.models.organizationmember import OrganizationMember
-from website.models.user import User
-from website import roles
 import datetime
 import random
 
