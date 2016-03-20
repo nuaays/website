@@ -120,9 +120,14 @@
                 <h4 style="font-size:20px;">采集 · 存储 · 搜索 · 可视化 · 告警</h4>
 
                 <li class="free-use">
-                    <a class="mr22" href="/register">申请试用</a>
+
                     <!--<a href="http://localhost:9000/auth/login/"  target="_blank">查看Demo</a>-->
-                    <a href="{{ OAUTH_SERVER }}/o/authorize/?state=random_state_string&response_type=code&{{CLIENT_ID}}&username={{user.username}}"  target="_blank">查看Demo</a>
+                    {% if user.is_authenticated %}
+                    <a href="http://{{ OAUTH_SERVER }}/o/authorize/?state=random_state_string&response_type=code&{{CLIENT_ID}}&username={{user.username}}"  target="_blank">查看Demo</a>
+                    {% else %}
+                    <a class="mr22" href="/register">申请试用</a>
+                    <a href="/login"  target="_blank">登陆后查看DEMO</a>
+                    {% endif %}
                 </li>
 
             </ul>
