@@ -8,7 +8,6 @@
 		<meta name="description" content="LogInsight（百泉众合）提供SaaS及私有化部署的实时日志分析平台，帮助企业实现机器数据价值的洞察，助力运维，提升运营，实现大数据战略的快速落地" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
 		<link href="/static/css/bootstrap.css" rel='stylesheet' type='text/css' />
-		<script type='text/javascript'>window.BWEUM||(BWEUM={});BWEUM.info = {"stand":true,"agentType":"browser","agent":"bi-collector.oneapm.com/static/js/bw-send-411.4.5.js","beaconUrl":"bi-collector.oneapm.com/beacon","licenseKey":"naAay~b67jZqzUMj","applicationID":2275197};</script><script type="text/javascript" src="//bi-collector.oneapm.com/static/js/bw-loader-411.4.5.js"></script>
 
 		<script src="/static/js/jquery.min.js"></script>
 		<link href="/static/css/style.css" rel='stylesheet' type='text/css' />
@@ -47,23 +46,15 @@ var _hmt = _hmt || [];
 						<!----start-top-nav---->
 						 <nav class="top-nav">
 							<ul>
-								<li class="active"><!--<a href="#home" class="scroll">首页</a></li>-->
-								<!--<li><a href="product.html" class="scroll">产品</a></li>-->
+								<li class="active">
+
 								<li><a href="/price" class="scroll">报价</a></li>
-								<!--<li><a href="using.html" class="scroll">使用场景</a></li>-->
-								<!--<li><a href="file.html" class="scroll">文档</a></li>-->
-								
-								<li><a href="http://blog.loginsight.cn" class="scroll" target="_blank">Blog</a></li>
+
 								<li><a href="http://loginsight.udesk.cn/hc" class="scroll" target="_blank">帮助</a></li>
                                 <li><a href="/about" class="scroll">关于</a></li>
-                                <li><span style="color:#fff;">|</span><a href="http://139.129.92.100/login" class="scroll-a">登陆</a></li>
+                                <li><span style="color:#fff;">|</span><a href="http://alpha.loginsight.cn/auth/login/" class="scroll-a">登陆</a></li>
                                 <li><a href="/register" class="scroll-b">注册</a></li>
-								<!--<li class="search">
-									<a href="javascript:;" class="search">
-										<span class="iconfont">&#xe60a;</span>
-									</a>
-						            <input type="text" class="form-control" placeholder="Search"/>
-						        </li>-->						
+
 							</ul>
 							<a href="javascript:;" id="pull">
 								<img src="/static/images/nav-icon.png" title="menu" />
@@ -76,11 +67,11 @@ var _hmt = _hmt || [];
 				<!--backbox-->
 				<div class="blackbox">
 					<div class="black">
-									<a href="price.html">报价</a></br><hr>
-									<a href="http://blog.loginsight.cn" target="_blank">Blog</a></br><hr>
+									<a href="/price">报价</a></br><hr>
+
 									<a href="http://loginsight.udesk.cn/hc"target="_blank">帮助</a></br><hr>
-									<a href="about.html">关于</a></br><hr>
-									<a class="scroll-e" href="http://139.129.92.100/login">登陆</a></br><hr>
+									<a href="/about">关于</a></br><hr>
+									<a class="scroll-e" href="http://alpha.loginsight.cn/auth/login/">登陆</a></br><hr>
 									<a class="scroll-f" href="/register">注册</a></br><hr>
 									<a class="scroll-g" href="#">返回</a></br><hr>
 					</div>
@@ -144,20 +135,17 @@ var _hmt = _hmt || [];
 						
 					</div>
 					<div class="pull-left span4">
-						<img id="span4-img" src="/static/images/t2.png">
-						<span style="font-size:20px;">王鉴，CTO</span><br><p>历任 LinkedIn, Twitter 搜索架构师，开源分布式实时半结构化数据库SenseiDB创始人，在日志型数据，有着非常丰富的经验。 </p>
-					</div>
-				</div>	
-				<div class="clearfix">
-					<div class="pull-left span4">
 						<img id="span4-img" src="/static/images/t3.png">
 						<span style="font-size:20px;">王勇，Sales VP</span><br><p>两次创业经历，九年IBM企业客户服务总监经验 ，有着非常丰富的行业销售经验。</p>
 					</div>
+				</div>	
+				<div class="clearfix">
+
 					<div class="pull-left span4">
 						<img id="span4-img" src="/static/images/t4.png">
 						<span style="font-size:20px;">陈自欣，COO</span><br><p>曾任职于IBM及国内大型ITOM企业，历任的解决方案总监及产品总监，对企业 IT 运维需求有深刻的了解。</p>
 					</div>
-					</div>
+
 				</div>
 				
 
@@ -183,28 +171,31 @@ var _hmt = _hmt || [];
 				<div class="top-footer-min">
 				<div class="col-md-3">
 					
-                    <a href="index.html"><img src="/static/images/logodfdfdf.png"></a>
+                    <a href="/index"><img src="/static/images/logodfdfdf.png"></a>
 				</div>
 				<ul class="col-md-3">
 					<li><h5>产品</h5></li>
+					<!--<li>
+						<a href="product.html">产品概述</a>
+					<li>-->
 					<li>
-						<a href="/product">产品概述</a>
+						<a href="/price">产品价格</a>
 					<li>
-					<li>
-						<a href="price.html">产品价格</a>
-					<li>
+					<!--
 					<li>
 						<a href="javascript:;">用户案例</a>
 					<li>
 					<li>
 						<a href="javascript:;">常见问题</a>
 					<li>
+					-->
 				</ul>
 				<ul class="col-md-3">
 					<li><h5>文档</h5></li>
 					<li>
-						<a href="file.html">简介</a>
+						<a href="http://loginsight.udesk.cn/hc">帮助中心</a>
 					<li>
+					<!--
 					<li>
 						<a href="javascript:;">快速入门</a>
 					<li>
@@ -214,17 +205,19 @@ var _hmt = _hmt || [];
 					<li>
 						<a href="javascript:;">疑难解答</a>
 					<li>
+					-->
 				</ul>
 				<ul class="col-md-3">
 					<li><h5>关于</h5></li>
 					<li>
-						<a href="about.html">公司简介</a>
-					<li>				
+						<a href="/about">公司简介</a>
 					<li>
-						<a href="contact_us.html">联系我们</a>
+
+					<li>
+						<a href="/contact">联系我们</a>
 					<li>
                     <li>
-						<a href="recruitment.html">招聘信息</a>
+						<a href="/recruitment">招聘信息</a>
 					<li>
 				</ul>
 				<ul class="col-md-3">

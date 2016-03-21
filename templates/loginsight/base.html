@@ -13,7 +13,6 @@
     <link href="/static/css/bootstrap.css" rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-    <script type='text/javascript'>window.BWEUM||(BWEUM={});BWEUM.info = {"stand":true,"agentType":"browser","agent":"bi-collector.oneapm.com/static/js/bw-send-411.4.5.js","beaconUrl":"bi-collector.oneapm.com/beacon","licenseKey":"naAay~b67jZqzUMj","applicationID":2275197};</script><script type="text/javascript" src="//bi-collector.oneapm.com/static/js/bw-loader-411.4.5.js"></script>
 
     <script src="/static/js/jquery.min.js"></script>
     <link href="/static/css/style.css" rel='stylesheet' type='text/css' />
@@ -49,7 +48,7 @@
             <div class="container">
 
                 <div class="logo">
-                    <a href="index.html"><img src="/static/images/logo.png" alt=""></a>
+                    <a href="/"><img src="/static/images/logo.png" alt=""></a>
                 </div>
                 <!----start-top-nav---->
                 <nav class="top-nav">
@@ -57,8 +56,6 @@
                         <li class="active">
 
                         <li><a href="/price" class="scroll">报价</a></li>
-
-                        <li><a href="http://blog.loginsight.cn" class="scroll" target="_blank">Blog</a></li>
                         <li><a href="http://loginsight.udesk.cn/hc" class="scroll" target="_blank">帮助</a></li>
                         <li><a href="/about" class="scroll">关于</a></li>
                         {% if user.is_authenticated %}
@@ -91,11 +88,10 @@
         <div class="blackbox">
             <div class="black">
 
-                <a href="price.html">报价</a></br><hr>
-                <a href="http://blog.loginsight.cn" target="_blank">Blog</a></br><hr>
+                <a href="/price">报价</a></br><hr>
                 <a href="http://loginsight.udesk.cn/hc"target="_blank">帮助</a></br><hr>
-                <a href="about.html">关于</a></br><hr>
-                <a class="scroll-e" href="http://139.129.92.100/login">登陆</a></br><hr>
+                <a href="/about">关于</a></br><hr>
+                <a class="scroll-e" href="/login">登陆</a></br><hr>
                 <a class="scroll-f" href="/register">注册</a></br><hr>
                 <a class="scroll-g" href="#">返回</a></br><hr>
             </div>
@@ -182,45 +178,23 @@
     </div>
 </div>
 {% block content %} {% endblock content %}
-
-<!-- tryout end -->
-<div class="clearfix"> </div>
 <!---- top-footer ---->
 <div class="top-footer clearfix">
     <div class="top-footer-min">
         <div class="col-md-3">
-
-            <a href="index.html"><img src="/static/images/logodfdfdf.png"></a>
+            <a href="/index"><img src="/static/images/logodfdfdf.png"></a>
         </div>
         <ul class="col-md-3">
             <li><h5>产品</h5></li>
             <li>
-                <a href="javascript:;">产品概述</a>
-            <li>
-            <li>
-                <a href="price.html">产品价格</a>
-            <li>
-            <li>
-                <a href="javascript:;">用户案例</a>
-            <li>
-            <li>
-                <a href="javascript:;">常见问题</a>
-            <li>
+                <a href="/price">产品价格</a>
+            </li>
         </ul>
         <ul class="col-md-3">
             <li><h5>文档</h5></li>
             <li>
-                <a href="javascript:;">简介</a>
-            <li>
-            <li>
-                <a href="javascript:;">快速入门</a>
-            <li>
-            <li>
-                <a href="javascript:;">使用指南</a>
-            <li>
-            <li>
-                <a href="javascript:;">疑难解答</a>
-            <li>
+                <a href="http://loginsight.udesk.cn/hc">帮助中心</a>
+            </li>
         </ul>
         <ul class="col-md-3">
             <li><h5>关于</h5></li>
@@ -239,11 +213,11 @@
             <li><h5>关注</h5></li>
             <li class="weibo">
                 <a id='new_tag' href="http://weibo.com/LogInsight?noscale_head=1#_rnd1446026527316" target="_blank"><img src="/static/images/weibo.png"> <span>新浪微博</span></a>
-            <li>
+            </li>
 
             <li>
                 <a  class="weixin" href="javascript:;" ><img src="/static/images/weixin.png"> 微信公众号</a>
-            <li>
+            <li/>
                 <div id="qrcode" >
                     <img src="/static/images/weixin0.png">
                 </div>
@@ -254,9 +228,7 @@
                     $(".weixin").mouseout(function(){
                         $("#qrcode").hide();
                     })
-                    $
                 </script>
-
         </ul>
     </div>
 </div>
@@ -273,6 +245,5 @@
 </div>
 <!---- footer ---->
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
 </body>
 </html>
