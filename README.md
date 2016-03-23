@@ -7,13 +7,9 @@
 - virtualenv env 
 - source env/bin/active 
 - pip install -r requirements.txt
-- python manage.py syncdb
-- python manage.py migrate website
-- python manage.py migrate example 
-- python manage.py migrate oauth_provider
-- python manage.py runserver 
-
+- ./upgrade.sh
 - website: http://localhost:8000
 - register app: http://localhost:8000/o/applications
 
-
+- settings/base.py 
+    - OAUTH_SERVER="http://localhost:8000"
