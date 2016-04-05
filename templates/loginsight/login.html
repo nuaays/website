@@ -43,8 +43,8 @@
 	</div><br>
 	<form  role="form" method="post" action="{% url 'django.contrib.auth.views.login' %}">
 		{% csrf_token %}
-		<input id="{{ form.username.auto_id }}" type="text" name="{{ form.username.name }}" class="form-control input-lg" placeholder="Username" required>
-		<input id="{{ form.password.auto_id }}" type="password" name="{{ form.password.name }}" class="form-control input-lg" placeholder="Password" required>
+		<input id="{{ form.username.auto_id }}" type="text" name="{{ form.username.name }}" class="form-control input-lg" placeholder="用户名" required>
+		<input id="{{ form.password.auto_id }}" type="password" name="{{ form.password.name }}" class="form-control input-lg" placeholder="密码" required>
 		<input type="hidden" name="next" value="{{next}}" />
 		<input value="Login" type="submit" class="btn btn-success" />
 	</form>
