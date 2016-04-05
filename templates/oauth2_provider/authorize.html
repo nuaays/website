@@ -1,0 +1,45 @@
+{% extends "oauth2_provider/base.html" %}
+
+{% load i18n %}
+{% block content %}
+    <div class="block-center">
+        {% if not error %}
+            <form id="authorizationForm" method="post">
+                <h2 class="block-center-heading">{% trans "授权" %} {% trans "登录SAAS"%}</h2>
+                {% csrf_token %}
+
+                {% for field in form %}
+                    {% if field.is_hidden %}
+                        {{ field }}
+                    {% endif %}
+                {% endfor %}
+
+                <p><h5>{% trans "您可以试用以下功能" %}</h5></p>
+                <ul>
+                    <!--{% for scope in scopes_descriptions %}-->
+                        <!--<li>{{ scope }}</li>-->
+                    <!--{% endfor %}-->
+                    <li> 访问SAAS 应用</li>
+                    <li> 创建组织</li>
+                    <li> 上传日志及应用崩溃信息</li>
+
+                </ul>
+
+                {{ form.errors }}
+                {{ form.non_field_errors }}
+
+                <div class="control-group">
+                    <div class="controls">
+                        <input type="submit" class="btn btn-large" value="取消"/>
+                        <input type="submit" class="btn btn-large btn-primary" name="allow" value="授权登录"/>
+                    </div>
+                </div>
+            </form>
+
+
+        {% else %}
+            <h2>Error: {{ error.error }}</h2>
+            <p>{{ error.description }}</p>
+        {% endif %}
+    </div>
+{% endblock %}
