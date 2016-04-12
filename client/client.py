@@ -20,13 +20,16 @@ from flask.ext.script import Manager, Command
 CLIENT_ID="ZvwRr6t?WkzuHO5htOkCjti-FHL=Ri5DsA!;6qWX"
 CLIENT_SECRET="ASzRYogeWgVasXPXsbpBAPTBYEXHiNjITAQBngM;TMmtH=xj1m7Lx33WNW99E9ozCEi88flhazxupg4Cr?:x=bbfZ=ih9;Fo7J6jjNc6jRZ9Q:CLOqB2dN!zv@lQz!=T"
 
-# 用户名和密码
-# username='wanghe'
-# password = '123'
+CLIENT_ID = "1S_wRvye9?Xq4mU91e!MPixJ9Qjl3yQIaW?7G=2j"
+CLIENT_SECRET = "hLXU?HCktQu::1xz9EsjWMUq:yiLp2A=SgQpH4HKTgM4zFS@WMQjFtVGSYV.gu6wC!6UCgfxSqyzKUZWymuyQq_lUGQH;Udmhy3gvAQ73GNF3HXgzT94YkNP0RvIx:m1"
 
-username = 'test11'
+# 用户名和密码
+# username='test'
+# password = '123qwe'
+
+username = 'test'
 password = '123qwe'
-url = "http://192.168.1.69:8000/o/token/"
+url = "http://auth.loginsight.cn/o/token/"
 headers = {"Authorization": "Basic " + base64.b64encode(CLIENT_ID + ":" + CLIENT_SECRET)}
 
 
@@ -50,24 +53,23 @@ def refresh_access_token():
 
 if __name__ == "__main__":
     access_token = get_access_token()
+    print 'access_token ==', access_token
     headers = {"Authorization": access_token['token_type'] + " " + access_token['access_token']}
 
-    # r = requests.get(url="http://192.168.1.69:8000/api/0/hello", headers=headers)
-    # print r.text
+    # r = requests.get(url="http://auth.loginsight.cn/api/0/hello", headers=headers)
+    # print 'rrrrrrrrrrrr===', r.text
     #
     # r = requests.get(url="http://192.168.1.69:8000/secret", headers=headers)
     # print r.text
 
-    r = requests.get(url="http://192.168.1.69:8000/")
+    #r = requests.get(url="http://192.168.1.69:8000/")
     # 获取sentry 实例
-    # r = requests.get(url="http://192.168.1.69:8000/api/0/hosts", headers=headers)
-    # print r.json()
-    # sentry_instance = r.json()
     # 向sentry 实例注册主机
     data = {'host_name': 'host111', 'host_type': 'web111', 'system': 'linux', 'distver': '1.0', 'mac_addr': "ff-cc-cd-20-21-21" }
-    SENTRY_URL_PREFIX = "http://192.168.1.69:9000"
-    r = requests.post(url=SENTRY_URL_PREFIX + "/api/0/agent/hosts", data=data, headers=headers )
-    print r.text
-    data = {'match_name': '^ff/aaafj/cc/aa/ccccc', 'stream_key': 'xx2222xxxxx', 'host_key': 'ed141f34521c9422eea23abb202beeee', 'alias_name': 'fff'}
-    r = requests.post(url=SENTRY_URL_PREFIX+"/api/0/agent/streams", data=data, headers=headers)
-    print r.json()
+    #SENTRY_URL_PREFIX = "http://192.168.1.69:9000"
+    r = requests.post(url="http://app.loginsight.cn/api/0/agent/hosts", data=data, headers=headers)
+    print 'ffffffff==', r.text
+
+    #data = {'match_name': '^ff/aaafj/cc/aa/ccccc', 'stream_key': 'xx2222xxxxx', 'host_key': 'ed141f34521c9422eea23abb202beeee', 'alias_name': 'fff'}
+    #r = requests.post(url=SENTRY_URL_PREFIX+"/api/0/agent/streams", data=data, headers=headers)
+    #print r.json()
