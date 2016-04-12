@@ -73,6 +73,7 @@ a:active,a:focus{
     background-image: -moz-linear-gradient( 100deg, rgb(50,199,176) 0%, rgb(72,220,128) 100%);
     background-image: -webkit-linear-gradient( 100deg, rgb(50,199,176) 0%, rgb(72,220,128) 100%);
     background-image: -ms-linear-gradient( 100deg, rgb(50,199,176) 0%, rgb(72,220,128) 100%);
+	background-color: rgb(60,210,150);
 	background-size:cover;
 	height:760px;
 }
