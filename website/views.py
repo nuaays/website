@@ -158,8 +158,8 @@ def f404(request):
 def logo(request):
     return render_to_response("loginsight/logo.html")
 
-def ceshi(request):
-    return render_to_response("loginsight/ceshi.html")
+def product(request):
+    return render_to_response("loginsight/product.html")
 
 def page_not_found(request):
     return render_to_response('loginsight/404.html')
