@@ -61,7 +61,7 @@ $(function(){
 //	});
 
 jQuery.extend(jQuery.validator.messages, {
-    required: "必选字段",
+  required: "必选字段",
 	remote: "请修正该字段",
 	email: "请输入正确格式的电子邮件",
 	url: "请输入合法的网址",
@@ -117,10 +117,9 @@ jQuery.extend(jQuery.validator.messages, {
 					minlength: 6,
 					equalTo: "#password"
 				},
-
 				cellphone: {
-				    required: true,
-				    minlength: 11,
+          required: true,
+          minlength: 11,
 					remote: {
 						url: "/checkphone",     //后台处理程序
 						type: "get",               //数据发送方式
@@ -140,7 +139,24 @@ jQuery.extend(jQuery.validator.messages, {
 					}
 				},
 				companyName: {
-				    required: true
+				    required: true,
+						remote: {
+							url: "/checkemail",     //后台处理程序
+							type: "get",               //数据发送方式
+							dataType: "json",           //接受数据格式
+							data: {                     //要传递的数据
+								companyName: function () {
+									return $("#companyName").val();
+								}
+							},
+							dataFilter: function(data, type){
+								if (data == "True"){
+									return true;
+								} else{
+									return false;
+								}
+							}
+						}
 				},
 				servercnt : {
 				    required: true,
@@ -172,7 +188,8 @@ jQuery.extend(jQuery.validator.messages, {
 					remote: "该手机号已被注册",
 				},
 				companyName: {
-				    required: "输入公司或组织名称"
+				    required: "输入公司或组织名称",
+						remote: "该组织名已被注册"
 				},
 				servercnt: {
 				    required: "请输入申请服务器数量",

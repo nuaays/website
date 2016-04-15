@@ -42,15 +42,20 @@ var _hmt = _hmt || [];
 				<form method="post" id="signupform" action="/register">
 					{% csrf_token %}
 					<div>
-						<div id="signup-input"><span>用户名：</span><input type="text" placeholder="用户名将作为登录账号" class="form-control" name="username" autocomplete="on" id="name"></div>
-						<div id="signup-input"><span>密码：</span><input type="password" placeholder="登录密码 6~15 位" class="form-control" name="password" autocomplete="off" id="password" style="ime-mode:disabled;" onpaste="return false"></div>
-						<div id="signup-input"><span>重复密码：</span><input type="password" placeholder="再次输入密码" class="form-control" name="repassword" autocomplete="off" id="repassword" style="ime-mode:disabled;" onpaste="return false"></div>
-						<div id="signup-input"><span>邮箱：</span><input type="text" placeholder="邮箱" class="form-control" name="email" autocomplete="on" id="email"></div>
-						<div id="signup-input"><span>手机号码：</span><input type="text" placeholder="手机号码" class="form-control phone" name="cellphone" autocomplete="on" id="cellphone"></div>
-						<div id="signup-input"><span>组织名：</span><input type="text" placeholder="组织名" class="form-control" name="companyName" autocomplete="on" id="companyName"></div>
-						<div id="signup-input"><span>子域名：</span><input type="text" placeholder="子域名" class="form-control" name="servercnt" autocomplete="on" id="servercnt"></div>.loginsight.cn
-
-
+						<!--<div id="username"><span>用户名：</span><input type="text" placeholder="用户名将作为登录账号" class="form-control" name="username" autocomplete="on" id="name"></div>-->
+						<!--<div id="password"><span>密码：</span><input type="password" placeholder="登录密码 6~15 位" class="form-control" name="password" autocomplete="off" id="password" style="ime-mode:disabled;" onpaste="return false"></div>-->
+						<!--<div id="repassword"><span>重复密码：</span><input type="password" placeholder="再次输入密码" class="form-control" name="repassword" autocomplete="off" id="repassword" style="ime-mode:disabled;" onpaste="return false"></div>-->
+						<!--<div id="email"><span>邮箱：</span><input type="text" placeholder="邮箱" class="form-control" name="email" autocomplete="on" id="email"></div>-->
+						<!--<div id="phone"><span>手机号码：</span><input type="text" placeholder="手机号码" class="form-control phone" name="cellphone" autocomplete="on" id="cellphone"></div>-->
+						<!--<div id="org_name"><span>组织名：</span><input type="text" placeholder="组织名" class="form-control" name="companyName" autocomplete="on" id="companyName"></div>-->
+						<!--<div id="sub_domain"><span>子域名：</span><input type="text"  placeholder="子域名" class="form-control" name="sub_domain" autocomplete="on" id="servercnt"></div>.loginsight.cn<div id="username"><span>用户名：</span><input type="text" placeholder="用户名将作为登录账号" class="form-control" name="username" autocomplete="on" id="name"></div>-->
+						<div id="username"><input type="text" placeholder="用户名将作为登录账号" class="form-control" name="username" autocomplete="on" id="name"></div>
+						<div id="password"><input type="password" placeholder="登录密码 6~15 位" class="form-control" name="password" autocomplete="off" id="password" style="ime-mode:disabled;" onpaste="return false"></div>
+						<div id="repassword"><input type="password" placeholder="再次输入密码" class="form-control" name="repassword" autocomplete="off" id="repassword" style="ime-mode:disabled;" onpaste="return false"></div>
+						<div id="email"><input type="text" placeholder="邮箱" class="form-control" name="email" autocomplete="on" id="email"></div>
+						<div id="phone"><input type="text" placeholder="手机号码" class="form-control phone" name="cellphone" autocomplete="on" id="cellphone"></div>
+						<div id="org_name"><input type="text" placeholder="组织名" class="form-control" name="companyName" autocomplete="on" id="companyName"></div>
+						<!--<div id="sub_domain"><input type="text"  placeholder="子域名" class="form-control" name="sub_domain" autocomplete="on" id="servercnt"></div>.loginsight.cn-->
 					</div>
 					<div>
 						<input type="submit" name="submit" value="完成注册" class="btn btn-success" id="submit_btn">

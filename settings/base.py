@@ -10,6 +10,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 DEBUG = os.environ.get('DJANGO_DEBUG', True)
 TEMPLATE_DEBUG = DEBUG
+LOGINSIGHT_DEBUG = True
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),

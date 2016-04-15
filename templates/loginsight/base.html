@@ -87,6 +87,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.username }} <b class="caret"></b></a>
                                 <ul class="dropdown-menu" role="menu">
+                                    <li> <a href="http://{{ OAUTH_SERVER }}/o/authorize/?state=random_state_string&response_type=code&{{CLIENT_ID}}&username={{user.username}}">管理控制台 </a></li>
                                     <li><a href="{% url "django.contrib.auth.views.logout" %}">退出登陆</a></li>
                                 </ul>
                             </li>
