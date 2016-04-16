@@ -3,8 +3,6 @@ from django.shortcuts import render
 import requests
 # Create your views here.
 from django.shortcuts import render_to_response
-from django.http import HttpResponse
-from django.conf import settings
 from django.core.context_processors import csrf
 from django.contrib.auth.models import User
 from models import UserDetail
@@ -16,6 +14,9 @@ from example.models import MyApplication
 from django.template import RequestContext
 from oauth2_provider.compat import urlencode
 import datetime
+
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 def add_application(username, application_name):
@@ -118,7 +119,7 @@ def register(request):
                         email=email,
                         is_superuser=False,
                         is_staff=True,
-                        is_active=True,
+                        is_active=False,
                         date_joined=str(datetime.datetime.now()))
             user.set_password(password)
             user.save()

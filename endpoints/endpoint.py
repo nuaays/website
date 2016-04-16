@@ -18,6 +18,8 @@ from endpoints.serializer import UserSerializer, GroupSerializer
 from oauth2_provider.models import AccessToken
 import requests
 # ViewSets define the view behavior.
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class UserViewSet(viewsets.ModelViewSet):

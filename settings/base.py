@@ -15,6 +15,8 @@ LOGINSIGHT_DEBUG = True
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
+AUTH_USER_MODEL = 'website.User'
+
 
 DATABASES = {}
 
