@@ -34,8 +34,8 @@
             <file leaf-file-name="bootstrap.css" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/static/css/bootstrap.css">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="0.5783009">
-                    <caret line="2138" column="23" selection-start-line="2138" selection-start-column="23" selection-end-line="2138" selection-end-column="23" />
+                  <state vertical-scroll-proportion="0.6397134">
+                    <caret line="2141" column="20" selection-start-line="2141" selection-start-column="20" selection-end-line="2141" selection-end-column="20" />
                     <folding />
                   </state>
                 </provider>
@@ -135,8 +135,8 @@
       <file leaf-file-name="signup-infor.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/loginsight/signup-infor.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.321428">
-              <caret line="56" column="57" selection-start-line="56" selection-start-column="57" selection-end-line="56" selection-end-column="57" />
+            <state vertical-scroll-proportion="-21.464285">
+              <caret line="90" column="18" selection-start-line="90" selection-start-column="18" selection-end-line="90" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -882,8 +882,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/loginsight/signup-infor.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.321428">
-          <caret line="56" column="57" selection-start-line="56" selection-start-column="57" selection-end-line="56" selection-end-column="57" />
+        <state vertical-scroll-proportion="-21.464285">
+          <caret line="90" column="18" selection-start-line="90" selection-start-column="18" selection-end-line="90" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -914,8 +914,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5783009">
-          <caret line="2138" column="23" selection-start-line="2138" selection-start-column="23" selection-end-line="2138" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.6397134">
+          <caret line="2141" column="20" selection-start-line="2141" selection-start-column="20" selection-end-line="2141" selection-end-column="20" />
           <folding />
         </state>
       </provider>
