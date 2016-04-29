@@ -5,25 +5,17 @@ import requests
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.conf import settings
-from django.views.generic import View
 from django.core.context_processors import csrf
 from django.contrib.auth.models import User
-from models import UserDetail, Organization, SentryInstance
+from models import UserDetail
 from django.conf import settings
 from django.views.generic.base import TemplateView
-from rest_framework import views
-from django.shortcuts import render
 from oauth2_provider.generators import generate_client_id, generate_client_secret
-from website.vhost import VHost
 from oauth2_provider.models import AccessToken
 from example.models import MyApplication
 from django.template import RequestContext
-from django.core.exceptions import ObjectDoesNotExist
-from aliyun import AliyunSDK
-# from website.models import Organization, SentryInstance, UserDetail, User
 from oauth2_provider.compat import urlencode
 import datetime
-import random
 
 
 def add_application(username, application_name):
@@ -98,7 +90,13 @@ def check_sub_domain(request):
 
 
 def check_org_name(request):
-    pass
+    if request.method == 'GET':
+        org = request.GET.get('org_name')
+    v = UserDetail.objects.filter('companyName')
+    if len(v) == 0:
+        return HttpResponse(True)
+    else:
+        return HttpResponse(False)
 
 
 def get_sentry_instance():
@@ -112,7 +110,7 @@ def register(request):
         password = request.POST.get('password', '')
         cellphone = request.POST.get('cellphone', '')
         companyName = request.POST.get('companyName', '')
-        servercnt = request.POST.get('servercnt', '')
+        servercnt = request.POST.get('servercnt', 0)
         organization_name = companyName
         sub_domain_name = request.POST.get('sub_domain', '')
         if not User.objects.filter(username=username):

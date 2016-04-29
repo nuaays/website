@@ -5,17 +5,12 @@ company: LogInsight
 email_ : wangh@loginsight.cn
 """
 
-
 from django.core.management.base import BaseCommand, CommandError
-from django.db import models
-#from placeholders import *
-import os
 from oauth2_provider.models import Application
 from example.models import MyApplication
-from aliyun import AliyunSDK
-import random
 from django.conf import settings
-from oauth2_provider import generators
+from django.contrib.auth.models import User
+from website.models import UserDetail
 
 
 def update_sentry_instances():
@@ -57,12 +52,15 @@ def create_sentry_application():
     # authorization_grant_type = Application.GRANT_AUTHORIZATION_CODE
     # client_type = Application.CLIENT_PUBLIC
     # redirect_url = "http://%s/oauth/consumer/exchange/" % (sentry_instance['sentry_ipaddress'],)
-    name = 'sentry01'
+    name = 'loginsight saas'
     client_id = settings.DEFALUT_SENTRY_CLIENT_ID
     client_secret = settings.DEFAULT_SENTRY_CLIENT_SECRET
     authorization_grant_type = Application.GRANT_AUTHORIZATION_CODE
     client_type = Application.CLIENT_PUBLIC
-    redirect_url = "http://app.loginsight.cn/oauth/consumer/exchange/"
+    if settings.LOGINSIGHT_DEBUG:
+        redirect_url = "http://localhost/oauth/consumer/exchange/"
+    else:
+        redirect_url = "http://app.loginsight.cn/oauth/consumer/exchange/"
 
     if not MyApplication.objects.filter(name=name):
         MyApplication.objects.create(name=name,
@@ -86,6 +84,20 @@ def create_logagent_application():
                                        user_id=1)
 
 
+def create_superuserdetails():
+    user = User.objects.get(id=1)
+    UserDetail.objects.create(
+        email='tech@loginsight.cn',
+        phone='18612372380',
+        org_name='LogInsight',
+        domain_name='loginsight.cn',
+        company='loginsight',
+        name=user.username,
+        password=user.password,
+        server_count=0,
+        user_id=user.id)
+
+
 class Command(BaseCommand):
      def handle(self, *args, **options):
         # 创建一个oauth provider application 给logagent
@@ -93,3 +105,4 @@ class Command(BaseCommand):
         print('Initilize website ...')
         create_sentry_application()
         create_logagent_application()
+        create_superuserdetails()
