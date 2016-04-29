@@ -35,35 +35,27 @@
 </head>
 <body class="login-background">
 
-<!--Contents-->
 <div class="loginbox">
-	<div>
-		<a href="/"><img src="/static/images/logolv.png"></a>
-		<!--<h3>登陆</h3>-->
-	</div><br>
+	<div><img src="/static/images/logo460x100.png"></div>
+<div class="loginbox-n">
+
 	<form  role="form" method="post" action="{% url 'django.contrib.auth.views.login' %}">
 		{% csrf_token %}
-		<div id="usname">
-		<span>用户名：</span>
-		<input id="{{ form.username.auto_id }}" type="text" name="{{ form.username.name }}" class="form-control input-lg" placeholder="username" required>
-		</div>
-		<div id="pswor">
-		<span>密码：</span>
-		<input id="{{ form.password.auto_id }}" type="password" name="{{ form.password.name }}" class="form-control input-lg" placeholder="password" required>
-		</div>
-
+		<input id="{{ form.username.auto_id }}" type="text" name="{{ form.username.name }}" class="form-control input-lg" placeholder="用户名" required>
+		<input id="{{ form.password.auto_id }}" type="password" name="{{ form.password.name }}" class="form-control input-lg" placeholder="密码" required>
 		<input type="hidden" name="next" value="{{next}}" />
-		<input value="Login" type="submit" class="btn btn-success" />
+		<input value="登录" type="submit" class="btn btn-success" />
 	</form>
 	{% if form.errors %}
 	<div class="row text-center">
-		<p>Your username and password didn't match. Please try again.</p>
+		<p style="color:red">您的用户名和密码不匹配。请再试一次。</p>
 	</div>
 	{% endif %}
 
-	<p>目前产品还在内测，完成注册后我们会及时告知您访问方式。</p>
-	<a href="/register" ><p style="color:#59e6ce;text-decoration:underline;">尚未注册？点击注册。</p></a>
+	<p>目前产品还在内测，<br>完成注册后我们会及时告知您访问方式。</p>
+	<a href="/register" ><p style="color:#34c9ab;text-decoration:underline;">尚未注册？点击注册。</p></a>
 	<!--<a href="forget-password.html"><p  style="color:#59e6ce;">忘记密码？</p></a>-->
+</div>
 </div>
 </body>
 </html>

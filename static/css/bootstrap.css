@@ -1998,7 +1998,7 @@ select[multiple].input-lg {
   display: inline-block;
   padding: 6px 12px;
   margin-bottom: 0;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: normal;
   line-height: 1.42857143;
   text-align: center;
@@ -2126,8 +2126,8 @@ fieldset[disabled] .btn-primary.active {
 }
 .btn-success {
   color: #fff;
-  background-color: #5cb85c;
-  border-color: #4cae4c;
+  background-color: #34c9ab;
+  border-color: #45d986;
 }
 .btn-success:hover,
 .btn-success:focus,
@@ -2135,8 +2135,8 @@ fieldset[disabled] .btn-primary.active {
 .btn-success.active,
 .open .dropdown-toggle.btn-success {
   color: #fff;
-  background-color: #47a447;
-  border-color: #398439;
+  background-color: #29B599;
+  border-color: #29B599;
 }
 .btn-success:active,
 .btn-success.active,

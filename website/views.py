@@ -155,6 +155,9 @@ def python(request):
 def f404(request):
     return render_to_response("loginsight/404.html")
 
+def f500(request):
+    return render_to_response("loginsight/500.html")
+
 def logo(request):
     return render_to_response("loginsight/logo.html")
 
